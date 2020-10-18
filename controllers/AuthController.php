@@ -32,9 +32,9 @@ class AuthController extends Controller {
 
             //2-Check Validation  and user data
             if($user->validate() && empty($user->errors)){
-              // $this->manager->save($user);
-               Application::$app->session->setFlashMessage('success', "Your account has been registered");
-               Application::$app->response->redirect('/');
+                $this->manager->save($user);
+                $this->addFlashMessage('success', "Your account has been registered");
+                $this->redirectTo('/');
             }
 
 

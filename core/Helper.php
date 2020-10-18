@@ -12,5 +12,11 @@ class Helper {
     }
 
 
+    public static function flashMessage()
+    {
+
+    }
+
+
 
 }

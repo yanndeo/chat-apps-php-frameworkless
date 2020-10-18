@@ -57,9 +57,9 @@ use app\core\Application;
         </nav>
 
         <?php if(Application::$app->session->getFlashMessage('success')): ;?>
-        <div class="alert alert-success">
-            <?php echo Application::$app->session->getFlashMessage('success'); ?>
-        </div>
+            <div class="alert alert-success">
+                <?php echo Application::$app->session->getFlashMessage('success'); ?>
+            </div>
         <?php endif; ?>
 
 
