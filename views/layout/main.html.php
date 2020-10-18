@@ -1,5 +1,5 @@
 <?php
-use app\core\Application;
+use \app\core\Helper;
 ?>
 <!doctype html>
 <html lang="en">
@@ -56,12 +56,9 @@ use app\core\Application;
             <!--/.container-fluid -->
         </nav>
 
-        <?php if(Application::$app->session->getFlashMessage('success')): ;?>
-            <div class="alert alert-success">
-                <?php echo Application::$app->session->getFlashMessage('success'); ?>
-            </div>
-        <?php endif; ?>
-
+        <div id="flash-messages">
+            <?php Helper::flashMessage(); ?>
+        </div>
 
         {{content}}
 

@@ -4,7 +4,12 @@ namespace app\core;
 
 class Session
 {
+
+    public const KEY_TYPE = [ 'success','danger', 'waring'];
+
     protected const FLASH_KEY = 'flash_messages';
+
+
 
     public function __construct()
     {
@@ -16,6 +21,8 @@ class Session
         $_SESSION[self::FLASH_KEY] = $flashMessages;
         //Helper::dump($flashMessages);
     }
+
+
 
     public function __destruct()
     {
@@ -33,15 +40,34 @@ class Session
 
     public function setFlashMessage($key, $message)
     {
-        $_SESSION[self::FLASH_KEY][$key] = [
-            'remove' => false,
-            'value' => $message
-        ];
+        $key = strtolower($key);
+        if(in_array($key, self::KEY_TYPE)){
+
+            $_SESSION[self::FLASH_KEY][$key] = [
+                'remove' => false,
+                'value' => $message
+            ];
+        }
+
     }
 
+    /**
+     * show message by key
+     * @param $key
+     * @return false|mixed
+     */
     public function getFlashMessage($key)
     {
         return $_SESSION[self::FLASH_KEY][$key]['value'] ?? false;
+    }
+
+    /**
+     * show all messages
+     * @return mixed
+     */
+    public  function gellAllFlashMessage()
+    {
+        return $_SESSION['flash_messages'];
     }
 
 }
