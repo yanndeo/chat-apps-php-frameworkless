@@ -5,8 +5,10 @@ use app\core\Application;
 use app\core\Controller;
 use app\core\Helper;
 use app\core\Request;
+use app\core\Response;
+use app\models\LoginForm;
 use app\models\User;
-use app\repositories\UserManager;
+use app\managers\UserManager;
 
 class AuthController extends Controller {
 
@@ -37,12 +39,11 @@ class AuthController extends Controller {
                 $this->redirectTo('/');
             }
 
-
-            return $this->render('register',['user' => $user ]);
+            return $this->render('register',['model' => $user ]);
         }
 
         $this->setLayout('auth');
-        return $this->render('register',[ 'user' => $user ]);
+        return $this->render('register',[ 'model' => $user ]);
 
     }
 
@@ -50,10 +51,18 @@ class AuthController extends Controller {
 
 
 
-    public function login(){
+    public function login(Request $request)
+    {
+        $loginForm = new LoginForm();
+        if($request->isPost()){
+            $loginForm->loadData($request->getBody());
+            if ($loginForm->validate() && $this->manager->login($loginForm)){
+                //$response->redirect('/');
 
+            }
+        }
         $this->setLayout('auth');
-        return $this->render('login');
+        return $this->render('login', ['model'=> $loginForm]);
     }
 
 

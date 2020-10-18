@@ -1,6 +1,7 @@
 <?php
-namespace app\repositories;
+namespace app\managers;
 
+use app\core\Application;
 use app\core\Helper;
 use app\core\Manager;
 use app\core\Model;
@@ -21,6 +22,28 @@ class UserManager extends Manager{
 
     }
 
+
+    public function login($model)
+    {
+        $params = ['email'=> $model->email ];
+        $user = $this->findOne($params, User::class) ;
+
+        if(!$user){
+            $model->addError('email', 'User does not exist with this email');
+            return false;
+        }
+
+        if(!password_verify($model->password, $user->password)){
+            $model->addError('password', 'Password is incorrect');
+            return false;
+        }
+        Helper::dump($user);
+
+        return Application::$app->login($user);
+
+
+    }
+
     /**
      * @return array
      */
@@ -28,6 +51,9 @@ class UserManager extends Manager{
     {
         return ['firstname', 'lastname', 'email', 'password', 'status'];
     }
+
+
+
 
 
 }

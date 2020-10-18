@@ -83,6 +83,27 @@ abstract class Manager{
     }
 
 
+    public function findOne($where, $className)
+    {
+        $tableName = $this->getTableName();
+
+        $attributes = array_keys($where);
+
+        $params = implode("AND", array_map(fn($attr) => "$attr = :$attr", $attributes));
+        $sql = "SELECT * FROM $tableName WHERE $params";
+
+        $req = $this->db->prepare($sql);
+
+        foreach ($where as $key => $item){
+            $req->bindValue(":$key", $item);
+        }
+
+        $req->execute();
+        return $req->fetchObject($className);
+
+    }
+
+
     /**
      * @param int $id
      */

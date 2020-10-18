@@ -59,23 +59,23 @@ abstract class Model
 
                 //check required value
                 if ($ruleName === self::RULE_REQUIRED && !$valueAttr) {
-                    $this->addError($attribute, self::RULE_REQUIRED);
+                    $this->addErrorForRule($attribute, self::RULE_REQUIRED);
                 }
                 //check validate email
                 if ($ruleName === self::RULE_EMAIL && !filter_var($valueAttr, FILTER_VALIDATE_EMAIL)) {
-                    $this->addError($attribute, self::RULE_EMAIL);
+                    $this->addErrorForRule($attribute, self::RULE_EMAIL);
                 }
                 //check min value
                 if ($ruleName === self::RULE_MIN && strlen($valueAttr) < $rule['min']) {
-                    $this->addError($attribute, self::RULE_MIN, $rule);
+                    $this->addErrorForRule($attribute, self::RULE_MIN, $rule);
                 }
                 //check max value
                 if ($ruleName === self::RULE_MAX && strlen($valueAttr) > $rule['max']) {
-                    $this->addError($attribute, self::RULE_MAX, $rule);
+                    $this->addErrorForRule($attribute, self::RULE_MAX, $rule);
                 }
                 //check match value with an other value
                 if ($ruleName === self::RULE_MATCH && $valueAttr !== $this->{$rule['match']} ){
-                    $this->addError($attribute, self::RULE_MATCH, $rule);
+                    $this->addErrorForRule($attribute, self::RULE_MATCH, $rule);
                 }
                 if($ruleName === self::RULE_UNIQUE){
                     $uniqAttr = $attribute;
@@ -85,7 +85,7 @@ abstract class Model
                     $record = $manager->db->prepareWithoutClass($sql, ['uniqAttr' => $valueAttr]);
                     if ($record !== false ){
                        //Helper::dump($record);
-                        $this->addError($attribute, self::RULE_UNIQUE, ['field' => $attribute ]);
+                        $this->addErrorForRule($attribute, self::RULE_UNIQUE, ['field' => $attribute ]);
 
                     }
                 }
@@ -107,7 +107,7 @@ abstract class Model
      * @param string $attribute
      * @param string $rule
      */
-    public function addError(string $attribute, string $rule, $params = [])
+    public function addErrorForRule(string $attribute, string $rule, $params = [])
     {
         $message = $this->errorMessages()[$rule] ?? '';
 
@@ -116,6 +116,17 @@ abstract class Model
         }
         
         $this->errors[$attribute][] = $message;  //[$attribute][all messages] 
+    }
+
+
+    /**
+     * @param string $attribute
+     * @param string $message
+     * @return string
+     */
+    public function addError(string $attribute, string $message)
+    {
+        return $this->errors[$attribute][] = $message;
     }
 
 

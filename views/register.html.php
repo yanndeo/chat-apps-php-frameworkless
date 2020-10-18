@@ -1,6 +1,10 @@
 <?php
 
 use app\core\form\Form;
+use app\models\User;
+
+/** @var $model User */
+
 ?>
 
 <h1>Create an account</h1>
@@ -9,15 +13,15 @@ use app\core\form\Form;
     <?php $form = Form::opening("", 'post') ?>
     <div class="row">     
         <div class="col-md-6">
-            <?php echo $form->field($user, 'firstname'); ?>
+            <?php echo $form->field($model, 'firstname'); ?>
         </div>
         <div class="col-md-6">
-            <?php echo $form->field($user, 'lastname'); ?>
+            <?php echo $form->field($model, 'lastname'); ?>
         </div>
     </div>
-    <?php echo $form->field($user, 'email'); ?>
-    <?php echo $form->field($user, 'password')->passwordTypeField() ; ?>
-    <?php echo $form->field($user, 'confirm_password')->passwordTypeField(); ?>
+    <?php echo $form->field($model, 'email'); ?>
+    <?php echo $form->field($model, 'password')->passwordTypeField() ; ?>
+    <?php echo $form->field($model, 'confirm_password')->passwordTypeField(); ?>
 
     <div class="form-group" style="margin-top: 14px;">
         <button type="submit" class="btn btn-block btn-primary">Submit</button>

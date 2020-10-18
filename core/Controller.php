@@ -40,6 +40,7 @@ abstract class Controller{
     protected function redirectTo(string $path)
     {
         Application::$app->response->redirect($path);
+        exit();
 
     }
 

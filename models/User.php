@@ -3,7 +3,7 @@
 namespace app\models;
 
 use app\core\Model;
-use app\repositories\UserManager;
+use app\managers\UserManager;
 
 class User extends Model{
 

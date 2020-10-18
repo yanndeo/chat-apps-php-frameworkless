@@ -51,5 +51,9 @@ class Application {
         $this->router->resolve(); //router must to find path into list and dispatch(call callback)
     }
 
-    
+    public function login($user)
+    {
+    }
+
+
 }
