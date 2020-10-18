@@ -19,19 +19,12 @@ class SiteController extends Controller {
 
 
 
-    public function contact()
+    public function chat()
     {
-        return $this->render('contact');
+        $this->setLayout('chat');
+        return $this->render('index');
     }
 
 
 
-    public function handleContact(Request $request)
-    {
-        echo '<pre>';
-        var_dump($request->getBody());
-        echo '</pre>'; 
-        exit;
-        echo 'handle contact form submitted';
-    }
 }

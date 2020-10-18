@@ -14,6 +14,7 @@ class User extends Model{
         'DELETED' => 2,
     ];
 
+    public string $id = '';
     public string $firstname = '';
     public string $lastname = '';
     public string $email = '';
@@ -21,6 +22,12 @@ class User extends Model{
     public int $status = self::STATE['INACTIVE'];
     public string $confirm_password = '';
 
+
+
+    public function __construct()
+    {
+        //self::$userManager = new  UserManager();
+    }
 
 
     /**
@@ -37,6 +44,24 @@ class User extends Model{
             'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => '6'], [self::RULE_MAX, 'max' => '24']],
             'confirm_password' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match'  =>'password']],
         ];
+    }
+
+
+
+
+
+
+
+    /**
+     * We need to access and find user from
+     * App constructor to initialize session
+     * or get user stored into session
+     * @param $params
+     */
+    public static function getUser($params)
+    {
+        $userManager = new UserManager(); //  need refacto this
+        return $userManager->findOne($params, self::class);
     }
 
     

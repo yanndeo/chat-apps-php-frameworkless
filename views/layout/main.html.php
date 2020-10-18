@@ -1,5 +1,7 @@
 <?php
 use \app\core\Helper;
+
+//Helper::dump(Helper::getUser());
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,6 +16,7 @@ use \app\core\Helper;
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="../css/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,21 +38,18 @@ use \app\core\Helper;
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">MVC</a>
+                    <a class="navbar-brand active" href="/">CHAT APP TEST</a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar-collapse collapse" ">
                     <ul class="nav navbar-nav mr-auto">
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/contact">Contact</a></>
+                        <li><a href="/chat">Chat</a></>
                     </ul>
 
-
-                    <ul class="nav navbar-nav mr-auto">
-                        <li class="active"><a href="/login">Login</a></li>
+                    <ul class="nav navbar-nav mr-auto auth">
+                        <li class=""><a href="/login">Login</a></li>
                         <li><a href="/register">Register</a></li>
                     </ul>
-
-
                 </div>
                 <!--/.nav-collapse -->
             </div>

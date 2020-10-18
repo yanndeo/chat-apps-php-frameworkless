@@ -11,6 +11,7 @@ class UserManager extends Manager{
 
     public static string $table = "users";
 
+    //why not use UserManager or Manager like singleton ???
 
     public function save($user)
     {
@@ -37,7 +38,7 @@ class UserManager extends Manager{
             $model->addError('password', 'Password is incorrect');
             return false;
         }
-        Helper::dump($user);
+       // Helper::dump($user);die;
 
         return Application::$app->login($user);
 
@@ -49,7 +50,7 @@ class UserManager extends Manager{
      */
     public function attributes(): array
     {
-        return ['firstname', 'lastname', 'email', 'password', 'status'];
+        return ['id','firstname', 'lastname', 'email', 'password', 'status'];
     }
 
 

@@ -1,6 +1,8 @@
 <?php
 namespace app\core;
 
+use app\models\User;
+
 class Helper {
 
 
@@ -29,6 +31,15 @@ class Helper {
             }
         }
 
+    }
+
+
+
+
+    public static function getUser()
+    {
+       $user =  Application::$app->user;
+        return $user;
     }
 
 

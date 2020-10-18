@@ -42,7 +42,6 @@ class AuthController extends Controller {
             return $this->render('register',['model' => $user ]);
         }
 
-        $this->setLayout('auth');
         return $this->render('register',[ 'model' => $user ]);
 
     }
@@ -54,14 +53,16 @@ class AuthController extends Controller {
     public function login(Request $request)
     {
         $loginForm = new LoginForm();
+
         if($request->isPost()){
+
             $loginForm->loadData($request->getBody());
             if ($loginForm->validate() && $this->manager->login($loginForm)){
-                //$response->redirect('/');
+               return $this->redirectTo('/chat');
 
             }
         }
-        $this->setLayout('auth');
+      //  $this->setLayout('auth');
         return $this->render('login', ['model'=> $loginForm]);
     }
 

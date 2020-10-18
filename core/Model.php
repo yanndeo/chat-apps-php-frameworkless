@@ -35,6 +35,8 @@ abstract class Model
 
     abstract public function rules(): array;
 
+    //abstract public function primaryKey() ;
+
     public array $errors = [];
 
 

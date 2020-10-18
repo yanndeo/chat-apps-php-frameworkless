@@ -9,6 +9,8 @@ $config = function () {
             'DB_PASSWORD' => '',
         ],
 
+        'user' => \app\models\User::class,
+
 
     ];
 };
