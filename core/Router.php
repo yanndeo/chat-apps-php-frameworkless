@@ -23,6 +23,10 @@ class Router
 
 
 
+
+
+
+
     /**
      *
      * @param Request $request
@@ -44,11 +48,12 @@ class Router
      * routes['get']
      * @param string $path
      * @param $callback
-     * @return void
      */
     public function get(string $path, $callback)
     {
         $this->routes[self::HTTP_METHODS[0]][$path] = $callback;
+        return $this->routes;
+
     }
 
 
@@ -57,11 +62,11 @@ class Router
      * routes['post']
      * @param string $path
      * @param $callback
-     * @return void
      */
     public function post(string $path, $callback)
     {
         $this->routes[self::HTTP_METHODS[1]][$path] = $callback;
+        return $this->routes;
     }
 
 
@@ -79,6 +84,36 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;  //match or not ?
 
         //-------------- Dispatch -----------------//
+        if(strpos($path, 'with') !== false  ){
+
+            $patterns = array_keys($this->routes[$method]);
+            $uri =  $this->request->getPath();
+
+            foreach ($patterns as $pattern=> $keyx){
+
+                $key = trim($keyx, '/');
+                $url = trim($uri, '/');
+
+                $key = preg_replace('#:([\w]+)#', '([^/]+)', $key);
+
+                $regex = "#^$key$#i" ;
+
+                if (preg_match($regex, $url, $matches)) {
+                    //Helper::dump($matches[1]);
+
+                    $controller = $this->routes[$method][$keyx];
+                    //Helper::dump($keyx);
+                    //Helper::dump($controller[0])
+
+                     call_user_func([new $controller[0],$controller[1] ], $matches[1], $this->request);
+
+                }
+
+
+            }
+
+
+        }
         if($callback === false) {
             $this->response->setStatusCode(self::STATUS_CODE['NOT_FOUND']);
             return $this->renderView('_404');
@@ -89,12 +124,22 @@ class Router
         }
 
         if(is_array($callback)) {
-          Application::$app->controller = new $callback[0]();
-          $callback[0] = Application::$app->controller;
+            Application::$app->controller = new $callback[0]();
+            $callback[0] = Application::$app->controller;
+
         }
 
-        return call_user_func($callback, $this->request, $this->response);
+
+
+
+        Helper::dump($path);
+        $id = 2;
+
+        return call_user_func($callback, $this->request, $this->response, $id);
     }
+
+
+
 
 
 

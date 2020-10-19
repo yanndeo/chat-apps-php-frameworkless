@@ -11,6 +11,11 @@ class MessageManager extends Manager
 
 
 
+    public function save($message)
+    {
+        return parent::save($message);
+
+    }
 
 
     /**

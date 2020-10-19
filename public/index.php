@@ -16,7 +16,7 @@ use app\core\Helper;
 Autoloader::register();
 
 
-
+var_dump($config);
 
 //Get data config 
 $config = call_user_func($config);
@@ -38,6 +38,8 @@ $app->seed->loadSeed();
 //define all routes
 $app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/chat', [SiteController::class, 'chat']);
+
+$app->router->get('/message/with/:id', [ChatController::class, 'sendMessage']);
 $app->router->post('/chat', [ChatController::class, 'sendMessage']);
 
 

@@ -11,6 +11,9 @@ class Message extends \app\core\Model
 
     public string $id = '';
     public string $content = '';
+    public string $user_from ='';
+    public string $user_to ='';
+    public string $created_at = '';
 
 
 
