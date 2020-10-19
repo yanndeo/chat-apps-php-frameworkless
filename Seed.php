@@ -70,7 +70,7 @@ class Seed
     private static function fakerUsers()
     {
         // Helper::dump(!self::checkTableExist('users'));
-        $tableName = 'users';
+        /*$tableName = 'users';
         $attributes = ['firstname', 'lastname', 'email', 'password', 'status', 'profile'];
 
         $params = array_map(fn($attr) => ":$attr", $attributes);  //Ex : [ ':firstname', ':email']
@@ -98,7 +98,7 @@ class Seed
                 echo "{$i}- User is created successfully <br>";
                 $i++ ;
             }
-        }
+        }*/
 
     }
 
