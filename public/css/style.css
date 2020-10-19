@@ -6,5 +6,19 @@ a{
     text-align: revert;
     float: right!important;
     //border: blue 1px solid;
+}
 
+
+#status_icon{
+    display: block;
+    border: 1px chartreuse solid;
+    border-radius: 50%;
+    float: left;
+    width: 10px;height: 10px;
+    margin-right: 8px;
+    background-color: chartreuse;
+    margin-top: 6px;
+}
+
+#status_text{
 }

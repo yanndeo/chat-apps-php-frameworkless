@@ -38,6 +38,43 @@ class Seed
     }
 
 
+    private static function users()
+    {
+        return [
+            'user1' => [
+                'firstname' => 'lune',
+                'lastname'=> 'samba',
+                'email' => 'lune@yahoo.fr',
+                'password' => 'secret',
+                'status' => 0,
+             ],
+            'user2' => [
+                'firstname' => 'murielle',
+                'lastname'=> 'barnabe',
+                'email' => 'murielle@gmail.com',
+                'password' => 'secret',
+                'status' => 0,
+            ],
+            'user3' => [
+                'firstname' => 'hussein',
+                'lastname'=> 'mustapha',
+                'email' => 'hussein@gmail.com',
+                'password' => 'secret',
+                'status' => 0,
+            ],
+            'user4' => [
+                'firstname' => 'Hanane',
+                'lastname'=> 'Tazi',
+                'email' => 'hanane@gmail.fr',
+                'password' => 'secret',
+                'status' => 0,
+            ],
+
+        ];
+
+    }
+
+
 
     private static function creatingTables()
     {
@@ -51,8 +88,28 @@ class Seed
             }
         }
 
-     // return self;
     }
+
+    private static function fakerUsers()
+    {
+        // Helper::dump(!self::checkTableExist('users'));
+        $i = 1;
+        if(!self::checkTableExist('users') !== false){
+
+            foreach (self::users() as $user => $data ){
+                foreach ($data as $key => $value){
+
+                }
+                //self::$db->exec($statement);
+                echo "{$i}- Table '{$user}' created successfully <br>";
+                $i++ ;
+            }
+        }
+
+    }
+
+
+
 
 
     /**
@@ -85,6 +142,27 @@ class Seed
             echo $sql . "<br>" . $exception->getMessage();
 
         }
+    }
+
+
+    private function save()
+    {
+        $tableName = $this->getTableName();
+        $attributes = $this->attributes();      //Ex : ['firstname', 'email']
+        $params = array_map(fn($attr) => ":$attr", $attributes);  //Ex : [ ':firstname', ':email']
+
+        $sql = "INSERT INTO $tableName (".implode(',', $attributes).") VALUES(".implode(',', $params).")";
+        // Helper::dump($sql);
+        $req = $this->db->prepare($sql);
+
+        foreach ($attributes as $attribute){
+            $req->bindValue(":$attribute", $model->{$attribute});
+        }
+
+        $req->execute();
+
+        return true;
+
     }
 
 

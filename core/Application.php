@@ -12,7 +12,7 @@ class Application {
     public Request $request;
     public Response $response;
     public Session $session;
-    public Controller $controller;
+    public ?Controller $controller = null;
     public Database $database;
     public Seed $seed;
 
@@ -21,6 +21,7 @@ class Application {
 
     public static Application $app;
     public static string $ROOT_DIRECTORY ;
+    public string $layout = "main";
 
 
 

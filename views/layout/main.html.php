@@ -44,7 +44,7 @@ use \app\core\Application;
                 <div id="navbar" class="navbar-collapse collapse" ">
                     <ul class="nav navbar-nav mr-auto">
                         <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/chat">Chat</a></>
+                        <li><a href="/chat">ChatRoom</a></>
                     </ul>
 
                     <?php if(Application::isGuest()): ; ?>
@@ -55,7 +55,9 @@ use \app\core\Application;
                     <?php else: ; ?>
                         <ul class="nav navbar-nav mr-auto auth">
                             <li class=""><a href="/logout">DECONNEXION</a></li>
-                            <li><a href=""> you'are connected</a></li>
+                            <li><a href="" class="status">
+                                    <span id="status_icon"></span>
+                                    <span id="status_text">you'are connected</span></a></li>
                         </ul>
                     <?php endif; ?>
 

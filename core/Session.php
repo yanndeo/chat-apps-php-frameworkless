@@ -5,7 +5,7 @@ namespace app\core;
 class Session
 {
 
-    public const KEY_TYPE = [ 'success','danger', 'waring'];
+    public const KEY_TYPE = [ 'success','danger', 'warning'];
 
     protected const FLASH_KEY = 'flash_messages';
 
