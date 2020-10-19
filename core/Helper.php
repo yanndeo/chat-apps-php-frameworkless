@@ -42,6 +42,11 @@ class Helper {
         return $user;
     }
 
+    public static function logout()
+    {
+        Application::$app->logout();
+    }
+
 
 
 }

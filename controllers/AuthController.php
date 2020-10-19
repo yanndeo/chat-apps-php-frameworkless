@@ -67,6 +67,13 @@ class AuthController extends Controller {
     }
 
 
+    public function logout()
+    {
+        Application::$app->logout();
+        $this->addFlashMessage('SUCCESS', "You have has been disconnected.");
+        return $this->redirectTo('/login');
+
+    }
 
     public function resetPasswd(){}
 

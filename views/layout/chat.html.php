@@ -1,7 +1,7 @@
 <?php
 use \app\core\Helper;
 
-//Helper::dump(Helper::getUser());
+Helper::dump(Helper::getUser());
 ?>
 <!DOCTYPE html>
 <html lang="en">

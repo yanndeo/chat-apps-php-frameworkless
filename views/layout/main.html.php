@@ -1,5 +1,6 @@
 <?php
 use \app\core\Helper;
+use \app\core\Application;
 
 //Helper::dump(Helper::getUser());
 ?>
@@ -46,10 +47,18 @@ use \app\core\Helper;
                         <li><a href="/chat">Chat</a></>
                     </ul>
 
-                    <ul class="nav navbar-nav mr-auto auth">
-                        <li class=""><a href="/login">Login</a></li>
-                        <li><a href="/register">Register</a></li>
-                    </ul>
+                    <?php if(Application::isGuest()): ; ?>
+                        <ul class="nav navbar-nav mr-auto auth">
+                            <li class=""><a href="/login">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                        </ul>
+                    <?php else: ; ?>
+                        <ul class="nav navbar-nav mr-auto auth">
+                            <li class=""><a href="/logout">DECONNEXION</a></li>
+                            <li><a href=""> you'are connected</a></li>
+                        </ul>
+                    <?php endif; ?>
+
                 </div>
                 <!--/.nav-collapse -->
             </div>
