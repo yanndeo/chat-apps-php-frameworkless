@@ -1,0 +1,94 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 -- phpMyAdmin SQL Dump\
+-- version 4.6.5.2\
+-- https://www.phpmyadmin.net/\
+--\
+-- Client :  localhost:3306\
+-- G\'e9n\'e9r\'e9 le :  Lun 19 Octobre 2020 \'e0 11:57\
+-- Version du serveur :  5.6.35\
+-- Version de PHP :  7.1.1\
+\
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";\
+SET time_zone = "+00:00";\
+\
+--\
+-- Base de donn\'e9es :  `frameworkless_chat`\
+--\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Structure de la table `messages`\
+--\
+\
+CREATE TABLE `messages` (\
+  `id` int(11) UNSIGNED NOT NULL,\
+  `user_from` int(11) NOT NULL,\
+  `user_to` int(11) NOT NULL,\
+  `content` longtext NOT NULL,\
+  `created_at` date DEFAULT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+-- --------------------------------------------------------\
+\
+--\
+-- Structure de la table `users`\
+--\
+\
+CREATE TABLE `users` (\
+  `id` int(11) UNSIGNED NOT NULL,\
+  `firstname` varchar(255) NOT NULL,\
+  `lastname` varchar(255) NOT NULL,\
+  `email` varchar(255) DEFAULT NULL,\
+  `password` varchar(255) NOT NULL,\
+  `profile` varchar(255) DEFAULT NULL,\
+  `status` tinyint(4) NOT NULL\
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;\
+\
+--\
+-- Contenu de la table `users`\
+--\
+\
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `profile`, `status`) VALUES\
+(109, 'Yann', 'Sambou', 'yann@gmail.com', '$2y$10$ZZQ0olwVWVB3US3z/Jl3vevb4oWpJjgQ6fhA3lB170XtbmwFBOCnK', 'user_2', 0),\
+(110, 'Lune', 'Sambou', 'lune@yahoo.fr', '$2y$10$GPgZ8gkJOf5rFu2SCij1mO2qNBwpWdyHQyha8KNXKBjTkIFrUa3WO', 'user_1', 0),\
+(111, 'Hassan', 'M', 'hassan@gmail.com', '$2y$10$7kHwfOEJSwzoMNu/UeCB2OXWVUnYdUvRGRhFCnYDrSxJ7tb7iwEv.', 'user_1', 0),\
+(112, 'Medhy', 'yamachi', 'medhy@gmail.com', '$2y$10$ClfNMfV3ohlpFXvDXOs48.n14UGXC1vja0s.kW6cRryx9pdmG.tWS', 'user_6', 0),\
+(113, 'rosie', 'd', 'rosiedev@gmail.com', '$2y$10$drc38qHhaUvcDniwc0VZ9OoEaDV/Bj0gl3M/4nYpwmjv/KcE2iujS', 'user_6', 1);\
+\
+--\
+-- Index pour les tables export\'e9es\
+--\
+\
+--\
+-- Index pour la table `messages`\
+--\
+ALTER TABLE `messages`\
+  ADD PRIMARY KEY (`id`);\
+\
+--\
+-- Index pour la table `users`\
+--\
+ALTER TABLE `users`\
+  ADD PRIMARY KEY (`id`);\
+\
+--\
+-- AUTO_INCREMENT pour les tables export\'e9es\
+--\
+\
+--\
+-- AUTO_INCREMENT pour la table `messages`\
+--\
+ALTER TABLE `messages`\
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;\
+--\
+-- AUTO_INCREMENT pour la table `users`\
+--\
+ALTER TABLE `users`\
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;}

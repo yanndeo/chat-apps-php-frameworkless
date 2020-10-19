@@ -17,7 +17,7 @@ class Application {
     public Seed $seed;
 
     public ?User $user = null;
-    public  $userClass ;
+    public   $userClass ;
 
     public static Application $app;
     public static string $ROOT_DIRECTORY ;

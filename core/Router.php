@@ -84,6 +84,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;  //match or not ?
 
         //-------------- Dispatch -----------------//
+
         if(strpos($path, 'with') !== false  ){
 
             $patterns = array_keys($this->routes[$method]);
@@ -105,7 +106,7 @@ class Router
                     //Helper::dump($keyx);
                     //Helper::dump($controller[0])
 
-                     call_user_func([new $controller[0],$controller[1] ], $matches[1], $this->request);
+                    return call_user_func([new $controller[0],$controller[1] ], $matches[1], $this->request);
 
                 }
 
@@ -130,12 +131,7 @@ class Router
         }
 
 
-
-
-        Helper::dump($path);
-        $id = 2;
-
-        return call_user_func($callback, $this->request, $this->response, $id);
+        return call_user_func($callback, $this->request, $this->response);
     }
 
 

@@ -42,34 +42,10 @@ class Seed
     private static function users()
     {
         return [
-            'user1' => [
-                'firstname' => 'lune',
-                'lastname'=> 'samba',
-                'email' => 'lune@yahoo.fr',
-                'password' => 'secret',
-                'status' => 0,
-             ],
-            'user2' => [
-                'firstname' => 'murielle',
-                'lastname'=> 'barnabe',
-                'email' => 'murielle@gmail.com',
-                'password' => 'secret',
-                'status' => 0,
-            ],
-            'user3' => [
-                'firstname' => 'hussein',
-                'lastname'=> 'mustapha',
-                'email' => 'hussein@gmail.com',
-                'password' => 'secret',
-                'status' => 0,
-            ],
-            'user4' => [
-                'firstname' => 'Hanane',
-                'lastname'=> 'Tazi',
-                'email' => 'hanane@gmail.fr',
-                'password' => 'secret',
-                'status' => 0,
-            ],
+            'user1' => [ 'firstname'=> 'luna', 'lastname' => 'sisi', 'email' => 'luna@yahoo.fr', 'password' => 'secret', 'status' => 0,],
+            'user2' => [ 'firstname'=> 'murielle', 'lastname' => 'barnabe','email' => 'murielle@gmail.com','password' => 'secret','status' =>  0],
+            'user3' => [ 'firstname'=> 'hussein', 'lastname' => 'mustapha','email' => 'hussein@gmail.com', 'password' => 'secret', 'status' => 0],
+            'user4' => ['firstname'=> 'Hanane', 'lastname' => 'Tazi','email' => 'hanane@gmail.fr', 'password' => 'secret', 'status' => 0],
 
         ];
 
@@ -94,15 +70,32 @@ class Seed
     private static function fakerUsers()
     {
         // Helper::dump(!self::checkTableExist('users'));
-        $i = 1;
-        if(!self::checkTableExist('users') !== false){
+        $tableName = 'users';
+        $attributes = ['firstname', 'lastname', 'email', 'password', 'status', 'profile'];
 
-            foreach (self::users() as $user => $data ){
-                foreach ($data as $key => $value){
+        $params = array_map(fn($attr) => ":$attr", $attributes);  //Ex : [ ':firstname', ':email']
+
+        $sql = "INSERT INTO $tableName (".implode(',', $attributes).") VALUES(".implode(',', $params).")";
+        // Helper::dump($sql);
+
+        $req = self::$db->prepare($sql);
+
+
+        if(!self::checkTableExist('users') !== false){
+            $i = 1;
+            foreach (self::users() as $data  ){
+
+                foreach ($data as  $key => $value) {
+
+                    foreach ($attributes as $attribute) {
+                        $req->bindValue(":$attribute", $data[$key]);
+                    }
+                    $req->execute();
 
                 }
+
                 //self::$db->exec($statement);
-                echo "{$i}- Table '{$user}' created successfully <br>";
+                echo "{$i}- User is created successfully <br>";
                 $i++ ;
             }
         }
@@ -146,25 +139,7 @@ class Seed
     }
 
 
-    private function save()
-    {
-        $tableName = $this->getTableName();
-        $attributes = $this->attributes();      //Ex : ['firstname', 'email']
-        $params = array_map(fn($attr) => ":$attr", $attributes);  //Ex : [ ':firstname', ':email']
 
-        $sql = "INSERT INTO $tableName (".implode(',', $attributes).") VALUES(".implode(',', $params).")";
-        // Helper::dump($sql);
-        $req = $this->db->prepare($sql);
-
-        foreach ($attributes as $attribute){
-            $req->bindValue(":$attribute", $model->{$attribute});
-        }
-
-        $req->execute();
-
-        return true;
-
-    }
 
 
 
@@ -177,5 +152,6 @@ class Seed
         //2- create tables
           self::creatingTables();
         //3- insert faker data
+          //self::fakerUsers();
     }
 }

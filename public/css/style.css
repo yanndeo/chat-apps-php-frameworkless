@@ -31,3 +31,7 @@ a{
 .chat-box label{
     display: none;
 }
+
+img.img-circle{
+    pointer-events: none;
+}

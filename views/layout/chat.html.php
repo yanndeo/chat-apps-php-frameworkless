@@ -2,8 +2,10 @@
 use \app\core\Helper;
 use \app\core\Application;
 
+if (Application::isGuest()){
+    Application::$app->response->redirect();
+}
 
-//Helper::dump(Helper::getUser());
 ?>
 <!DOCTYPE html>
 <html lang="en">

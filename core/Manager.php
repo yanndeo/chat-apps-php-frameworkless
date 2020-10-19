@@ -35,6 +35,7 @@ abstract class Manager{
     {
         $tableName = $this->getTableName();
         $attributes = $this->attributes();      //Ex : ['firstname', 'email']
+
         $params = array_map(fn($attr) => ":$attr", $attributes);  //Ex : [ ':firstname', ':email']
 
         $sql = "INSERT INTO $tableName (".implode(',', $attributes).") VALUES(".implode(',', $params).")";

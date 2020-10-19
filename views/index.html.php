@@ -25,8 +25,8 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
             <?php  foreach ($users as $user ): ?>
             <?php if(Helper::getUser()->id !== $user->id): ?>
                 <li>
-                    <a href='/message/with/<?php echo $user->id; ?>' class="clearfix">
-                        <img src="https://bootdey.com/img/Content/<?php echo $user->profile ?>.jpg" alt="" class="img-circle">
+                    <a href="/message/with/<?php echo $user->id; ?>"  onclick="func(0)" class="clearfix">
+                        <img src="https://bootdey.com/img/Content/<?php echo $user->profile ?>.jpg" alt=""  class="img-circle">
                         <div class="friend-name">
                             <strong><?php echo ucfirst($user->firstname. ' '.$user->lastname) ; ?> </strong>
                         </div>
