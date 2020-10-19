@@ -22,3 +22,12 @@ a{
 
 #status_text{
 }
+
+
+.chat-box input[type='text']{
+    height: 80px;
+}
+
+.chat-box label{
+    display: none;
+}

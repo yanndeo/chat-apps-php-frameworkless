@@ -77,19 +77,6 @@ class Database {
 
 
 
-    /*public function prepare($statement, $attributes, $className)
-    {
-        $req = $this->getPDO()->prepare($statement);
-        $req->execute();
-
-        $data = $req->fetchAll(PDO::FETCH_CLASS, $className);
-        //$req->closeCursor();
-
-        return $data;
-    }*/
-
-
-
     /**
      * Undocumented function
      * @param [type] $statement
@@ -100,9 +87,6 @@ class Database {
         return $this->getPDO()->prepare($statement);
 
     }
-
-
-
 
 
     public function exec($statement)

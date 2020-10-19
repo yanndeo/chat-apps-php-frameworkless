@@ -1,101 +1,41 @@
+<?php
+/** @var $model Message */
+/** @var $users User */
 
+
+use app\core\form\Form;
+use app\models\Message;
+use app\models\User;
+
+
+$images = array("user_6", "user_2", "user_3", "user_5", "user_1");
+
+?>
 <div class="row">
     <div class="col-md-4 bg-white ">
-        <div class=" row border-bottom padding-sm" style="height: 40px;">
-            Member
+        <div class=" row border-bottom padding-sm" style="height: 40px; padding: 10px">
+            <?php echo count($users) -1 ; ?> Member(s) online
         </div>
 
         <!-- =============================================================== -->
         <!-- member list -->
         <ul class="friend-list">
-            <li class="active bounceInDown">
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>John Doe</strong>
-                    </div>
-                    <div class="last-message text-muted">Hello, Are you there?</div>
-                    <small class="time text-muted">Just now</small>
-                    <small class="chat-alert label label-danger">1</small>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>Jane Doe</strong>
-                    </div>
-                    <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                    <small class="time text-muted">5 mins ago</small>
-                    <small class="chat-alert text-muted"><i class="fa fa-check"></i></small>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>Kate</strong>
-                    </div>
-                    <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                    <small class="time text-muted">Yesterday</small>
-                    <small class="chat-alert text-muted"><i class="fa fa-reply"></i></small>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>Kate</strong>
-                    </div>
-                    <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                    <small class="time text-muted">Yesterday</small>
-                    <small class="chat-alert text-muted"><i class="fa fa-reply"></i></small>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>Kate</strong>
-                    </div>
-                    <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                    <small class="time text-muted">Yesterday</small>
-                    <small class="chat-alert text-muted"><i class="fa fa-reply"></i></small>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_6.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>Kate</strong>
-                    </div>
-                    <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                    <small class="time text-muted">Yesterday</small>
-                    <small class="chat-alert text-muted"><i class="fa fa-reply"></i></small>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_5.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>Kate</strong>
-                    </div>
-                    <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                    <small class="time text-muted">Yesterday</small>
-                    <small class="chat-alert text-muted"><i class="fa fa-reply"></i></small>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="clearfix">
-                    <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
-                    <div class="friend-name">
-                        <strong>Jane Doe</strong>
-                    </div>
-                    <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                    <small class="time text-muted">5 mins ago</small>
-                    <small class="chat-alert text-muted"><i class="fa fa-check"></i></small>
-                </a>
-            </li>
+
+            <?php  foreach ($users as $user ): ?>
+            <?php if(\app\core\Helper::getUser()->id !== $user->id): ?>
+                <li>
+                    <a href="#" class="clearfix">
+                        <img src="https://bootdey.com/img/Content/<?php echo $user->profile ?>.jpg" alt="" class="img-circle">
+                        <div class="friend-name">
+                            <strong><?php echo ucfirst($user->firstname. ' '.$user->lastname) ; ?> </strong>
+                        </div>
+                        <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
+                        <small class="time text-muted " id="status_icon"></small>
+                    </a>
+                </li>
+                <?php endif ; ?>
+            <?php endforeach; ?>
+
         </ul>
     </div>
 
@@ -204,13 +144,28 @@
                 </li>
             </ul>
         </div>
+
+
         <div class="chat-box bg-white">
+
+        <?php $form = Form::opening("", 'post') ?>
+
+            <?php echo $form->field($model, 'content'); ?>
+
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-block btn-primary">Submit</button>
+            </span>
+            <?php Form::closing() ?>
+        </div>
+
+
+        <!--<div class="chat-box bg-white">
             <div class="input-group">
                 <input class="form-control border no-shadow no-rounded" placeholder="Type your message here">
                 <span class="input-group-btn">
             			<button class="btn btn-success no-rounded" type="button">Send</button>
             		</span>
             </div><!-- /input-group -->
-        </div>
+        </div>-->
     </div>
 </div>

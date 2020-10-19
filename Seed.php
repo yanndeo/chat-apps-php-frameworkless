@@ -25,6 +25,7 @@ class Seed
                 lastname VARCHAR(255) NOT NULL,
                 email VARCHAR(255),
                 password VARCHAR(255) NOT NULL,
+                profile VARCHAR(255), 
                 status TINYINT NOT NULL)",
 
             'messages' => "CREATE TABLE messages ( 

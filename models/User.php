@@ -15,13 +15,14 @@ class User extends Model{
         'DELETED' => 2,
     ];
 
-    public UserManager $userManager;
+   // public UserManager $userManager;
 
     public string $id = '';
     public string $firstname = '';
     public string $lastname = '';
     public string $email = '';
     public string $password = '';
+    public string $profile = '';
     public int $status = self::STATE['INACTIVE'];
     public string $confirm_password = '';
 
@@ -29,7 +30,7 @@ class User extends Model{
 
     public function __construct()
     {
-        $this->userManager = new UserManager();
+       // $this->userManager = new UserManager();
     }
 
 

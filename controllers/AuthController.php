@@ -65,7 +65,6 @@ class AuthController extends Controller {
                 return $this->redirectTo('/chat');
             }
         }
-      //  $this->setLayout('auth');
         return $this->render('login', ['model'=> $loginForm]);
     }
 

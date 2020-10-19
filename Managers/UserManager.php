@@ -17,6 +17,7 @@ class UserManager extends Manager{
     {
         if($user instanceof User){
             $user->status = User::STATE['INACTIVE'];
+            $user->profile = Helper::getProfile();
             $user->password = password_hash($user->password, PASSWORD_DEFAULT);
         }
         return parent::save($user);
@@ -26,11 +27,10 @@ class UserManager extends Manager{
 
     public function update(User $user,string $attribute, $where = 'id' )
     {
-        $tableName = $this->getTableName();
         $value = $user->{$attribute};
         $whereValue = $user->{$where};
 
-        $sql = "UPDATE {$tableName} SET $attribute= $value WHERE $where= $whereValue";
+        $sql = "UPDATE {$this->getTableName()} SET $attribute= $value WHERE $where= $whereValue";
 
         // Prepare statement
         $req = $this->db->prepare($sql);
@@ -41,6 +41,15 @@ class UserManager extends Manager{
         return $req->rowCount() ;
     }
 
+
+
+    public function findAllOnline()
+    {
+        $className = User::class;
+        $sql = "SELECT * FROM {$this->getTableName()} WHERE status = '1' ORDER BY 'DESC'";
+
+        return $this->db->query($sql, $className);
+    }
 
 
 
@@ -71,10 +80,8 @@ class UserManager extends Manager{
      */
     public function attributes(): array
     {
-        return ['id','firstname', 'lastname', 'email', 'password', 'status'];
+        return ['id','firstname', 'lastname', 'email', 'password', 'status', 'profile'];
     }
-
-
 
 
 
