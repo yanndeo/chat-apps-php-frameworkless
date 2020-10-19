@@ -1,7 +1,9 @@
 <?php
 use \app\core\Helper;
+use \app\core\Application;
 
-Helper::dump(Helper::getUser());
+
+//Helper::dump(Helper::getUser());
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -232,11 +234,14 @@ Helper::dump(Helper::getUser());
             <ul class="nav navbar-nav mr-auto">
                 <li class="active"><a href="/">Home</a></li>
             </ul>
+            <?php if(!Application::isGuest()): ; ?>
 
             <ul class="nav navbar-nav mr-auto auth">
                 <li class=""><a href="/logout">DECONNEXION</a></li>
-                <li><a href="">Welcome Yann deo</a></li>
+                <li><a href="">Welcome <?php echo Helper::getUser()->displayName(); ?></a></li>
             </ul>
+            <?php endif; ?>
+
         </div>
         <!--/.nav-collapse -->
 </div>

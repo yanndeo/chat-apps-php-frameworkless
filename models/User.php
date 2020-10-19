@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\core\Application;
 use app\core\Model;
 use app\managers\UserManager;
 
@@ -13,6 +14,8 @@ class User extends Model{
         'ACTIVE' => 1,
         'DELETED' => 2,
     ];
+
+    public UserManager $userManager;
 
     public string $id = '';
     public string $firstname = '';
@@ -26,7 +29,7 @@ class User extends Model{
 
     public function __construct()
     {
-        //self::$userManager = new  UserManager();
+        $this->userManager = new UserManager();
     }
 
 
@@ -44,6 +47,13 @@ class User extends Model{
             'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => '6'], [self::RULE_MAX, 'max' => '24']],
             'confirm_password' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match'  =>'password']],
         ];
+    }
+
+
+
+    public function displayName(): string
+    {
+        return ucfirst($this->firstname .' '.$this->lastname);
     }
 
 

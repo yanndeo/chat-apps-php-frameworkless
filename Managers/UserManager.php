@@ -24,6 +24,26 @@ class UserManager extends Manager{
     }
 
 
+    public function update(User $user,string $attribute, $where = 'id' )
+    {
+        $tableName = $this->getTableName();
+        $value = $user->{$attribute};
+        $whereValue = $user->{$where};
+
+        $sql = "UPDATE {$tableName} SET $attribute= $value WHERE $where= $whereValue";
+
+        // Prepare statement
+        $req = $this->db->prepare($sql);
+
+        // execute the query
+        $req->execute();
+
+        return $req->rowCount() ;
+    }
+
+
+
+
     public function login($model)
     {
         $params = ['email'=> $model->email ];
@@ -38,10 +58,11 @@ class UserManager extends Manager{
             $model->addError('password', 'Password is incorrect');
             return false;
         }
-       // Helper::dump($user);die;
+       //Helper::dump($user);die;
+         $user->status = User::STATE['ACTIVE'];
+         $this->update($user, 'status');
 
         return Application::$app->login($user);
-
 
     }
 

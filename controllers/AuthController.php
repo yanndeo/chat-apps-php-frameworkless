@@ -57,9 +57,12 @@ class AuthController extends Controller {
         if($request->isPost()){
 
             $loginForm->loadData($request->getBody());
-            if ($loginForm->validate() && $this->manager->login($loginForm)){
-               return $this->redirectTo('/chat');
 
+            if ($loginForm->validate() && $this->manager->login($loginForm)){
+
+                $this->addFlashMessage('SUCCESS', "You are logged.");
+
+                return $this->redirectTo('/chat');
             }
         }
       //  $this->setLayout('auth');
@@ -69,6 +72,11 @@ class AuthController extends Controller {
 
     public function logout()
     {
+        $user = Helper::getUser(); //user connected
+        $user->status = User::STATE['INACTIVE']; //set status user obj
+        $this->manager->update($user, 'status'); // set record user into database
+
+       // Helper::dump($user);die;
         Application::$app->logout();
         $this->addFlashMessage('SUCCESS', "You have has been disconnected.");
         return $this->redirectTo('/login');
