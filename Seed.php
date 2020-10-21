@@ -84,6 +84,7 @@ class Seed
         if(!self::checkTableExist('users') && self::countUsers() === 0  ){
             $i = 1;
             foreach (self::users() as $data  ){
+                
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 foreach ($attributes as $attribute) {

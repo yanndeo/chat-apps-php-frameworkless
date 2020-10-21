@@ -11,6 +11,7 @@ Implement Chat using MVC &amp; POO without framework . PHP /MYSQL/ HTML
 
 # PROCEDURE D'INSTALLATION
 - Télécharger le projet depuis le repository
+- Ajuster les informations de configuration dans le fichier .env.php
 - Creer manuellement une base de donnée à partir des information definie dans le fichier de configuration .env.php du projet
 - Le projet ne contient pas de composer files  et autres bibliotheques externe. Tout est fait manuellement : autoloader, router, .env.php ..
 - Une fois la base de donnée creer demarrer le server interne de php comme suit  : php -S localhost:8887 -t public/
