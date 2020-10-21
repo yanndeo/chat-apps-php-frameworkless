@@ -98,7 +98,6 @@ abstract class Manager{
         foreach ($where as $key => $item){
             $req->bindValue(":$key", $item);
         }
-
         $req->execute();
         return $req->fetchObject($className);
 

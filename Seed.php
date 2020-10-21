@@ -80,14 +80,13 @@ class Seed
 
         $req = self::$db->prepare($sql);
         
-
         //if tables users exist and there are not users into this table
         if(!self::checkTableExist('users') && self::countUsers() === 0  ){
             $i = 1;
             foreach (self::users() as $data  ){
-                
+                $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
                 foreach ($attributes as $attribute) {
-                  
                     $req->bindValue(":$attribute", $data[$attribute]);
                 }
                 //Helper::dump($req);die;

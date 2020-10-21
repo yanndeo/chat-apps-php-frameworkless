@@ -6,8 +6,8 @@ Implement Chat using MVC &amp; POO without framework . PHP /MYSQL/ HTML
 - Mysql 5.6
 
 # LINKS
-- Database : 
-- user password: secret 
+- Database : un fichier sql est présent à la racine du projet: frameworkless_chat.sql
+- user account password: secret 
 
 # PROCEDURE D'INSTALLATION
 - Télécharger le projet depuis le repository
