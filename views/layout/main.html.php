@@ -17,7 +17,7 @@ use \app\core\Application;
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -55,9 +55,12 @@ use \app\core\Application;
                     <?php else: ; ?>
                         <ul class="nav navbar-nav mr-auto auth">
                             <li class=""><a href="/logout">DECONNEXION</a></li>
-                            <li><a href="" class="status">
+                            <li>
+                                <a href="#" class="status">
                                     <span id="status_icon"></span>
-                                    <span id="status_text">you'are connected</span></a></li>
+                                    <span id="status_text">you'are connected</span>
+                                </a>
+                            </li>
                         </ul>
                     <?php endif; ?>
 

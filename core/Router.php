@@ -166,11 +166,8 @@ class Router
        
         if(Application::$app->controller){
             $layout = Application::$app->controller->layout;
-            
-
         }
-        Helper::dump($layout);
-       // die;
+       
         ob_start();
         include_once Application::$ROOT_DIRECTORY . "/views/layout/$layout.html.php";
         $content = ob_get_clean();

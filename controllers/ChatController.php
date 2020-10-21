@@ -27,11 +27,12 @@ class ChatController extends Controller
     public function showMessages(int $id, Request $request)
     {
         if (!Application::isGuest()) {
-            
+
+            $message = new Message();
             $users = $this->userManager->findAllOnline();
-            
+
             $this->setLayout('chat');
-            return $this->render('index', ['model' => new Message(), 'users' => $users]);
+            return $this->render('index', ['model' => $message, 'users' => $users]);
 
 
         }

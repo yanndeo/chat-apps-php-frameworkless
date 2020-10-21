@@ -2,10 +2,6 @@
 use \app\core\Helper;
 use \app\core\Application;
 
-if (Application::isGuest()){
-    Application::$app->response->redirect();
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -214,7 +210,7 @@ if (Application::isGuest()){
             outline: 0;
         }
     </style>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
 
 </head>
 <body>
@@ -237,7 +233,6 @@ if (Application::isGuest()){
                 <li class="active"><a href="/">Home</a></li>
             </ul>
             <?php if(!Application::isGuest()): ; ?>
-
             <ul class="nav navbar-nav mr-auto auth">
                 <li class=""><a href="/logout">DECONNEXION</a></li>
                 <li><a href="">Welcome <?php echo Helper::getUser()->displayName(); ?></a></li>
