@@ -106,7 +106,9 @@ class Router
                     //Helper::dump($keyx);
                     //Helper::dump($controller[0])
 
-                    return call_user_func([new $controller[0],$controller[1] ], $matches[1], $this->request);
+                    Application::$app->controller = new $controller[0];
+                    $controller[0] = Application::$app->controller;
+                    return call_user_func($controller, $matches[1], $this->request);
 
                 }
 
@@ -161,9 +163,14 @@ class Router
     protected function layoutContent()
     {
         $layout = Application::$app->layout;
+       
         if(Application::$app->controller){
             $layout = Application::$app->controller->layout;
+            
+
         }
+        Helper::dump($layout);
+       // die;
         ob_start();
         include_once Application::$ROOT_DIRECTORY . "/views/layout/$layout.html.php";
         $content = ob_get_clean();

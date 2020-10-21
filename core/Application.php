@@ -34,7 +34,7 @@ class Application {
 
         $this->request =  new Request();
         $this->response = new Response();
-        $this->session = new  Session();
+        $this->session =  new  Session();
 
         $this->database = new Database($config['database']);
         $this->seed = new Seed($this->database);

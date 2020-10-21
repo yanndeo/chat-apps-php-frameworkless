@@ -83,8 +83,11 @@ class Seed
         //if tables users exist and there are not users into this table
         if(!self::checkTableExist('users') && self::countUsers() === 0  ){
             $i = 1;
+
+            echo "---------------USER ACCOUNT--------------- <br>";
+
             foreach (self::users() as $data  ){
-                
+
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
                 foreach ($attributes as $attribute) {
@@ -93,7 +96,6 @@ class Seed
                 //Helper::dump($req);die;
 
                 $req->execute();
-
 
                 //self::$db->exec($statement);
                 echo "- User{$i} is created successfully <br>";
@@ -147,9 +149,10 @@ class Seed
             $sql = "CREATE DATABASE IF NOT EXISTS {$dbName} DEFAULT CHARACTER SET utf8";
             $data = self::$db->exec($sql);
             echo 'Database created successfully<br>';
+
+            return ;
         }catch (\PDOException $exception){
             echo $sql . "<br>" . $exception->getMessage();
-
         }
     }
 
@@ -164,7 +167,7 @@ class Seed
     {
         
         //1- Create database
-          //self::creatingDatabase() ; we need create database manually
+          //self::creatingDatabase() ; //we need create database manually
         //2- create tables
           self::creatingTables();
         //3- insert faker data
