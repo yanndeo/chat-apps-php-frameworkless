@@ -3,6 +3,7 @@
 namespace app;
 use app\core\Database;
 use app\core\Helper;
+use app\models\User;
 
 class Seed
 {
@@ -42,10 +43,10 @@ class Seed
     private static function users()
     {
         return [
-            'user1' => [ 'firstname'=> 'luna', 'lastname' => 'sisi', 'email' => 'luna@yahoo.fr', 'password' => 'secret', 'status' => 0,],
-            'user2' => [ 'firstname'=> 'murielle', 'lastname' => 'barnabe','email' => 'murielle@gmail.com','password' => 'secret','status' =>  0],
-            'user3' => [ 'firstname'=> 'hussein', 'lastname' => 'mustapha','email' => 'hussein@gmail.com', 'password' => 'secret', 'status' => 0],
-            'user4' => ['firstname'=> 'Hanane', 'lastname' => 'Tazi','email' => 'hanane@gmail.fr', 'password' => 'secret', 'status' => 0],
+            [ 'firstname'=> 'luna', 'lastname' => 'sisi', 'email' => 'luna@yahoo.fr', 'password' => 'secret', 'status' => 0, 'profile' => 'user_1'],
+            [ 'firstname'=> 'murielle', 'lastname' => 'barnabe','email' => 'murielle@gmail.com','password' => 'secret','status' =>  0, 'profile' => 'user_2' ],
+            [ 'firstname'=> 'hussein', 'lastname' => 'mustapha','email' => 'hussein@gmail.com', 'password' => 'secret', 'status' => 0, 'profile' => 'user_3' ],
+            ['firstname'=> 'Hanane', 'lastname' => 'Tazi','email' => 'hanane@gmail.fr', 'password' => 'secret', 'status' => 0, 'profile' => 'user_4'],
 
         ];
 
@@ -69,36 +70,36 @@ class Seed
 
     private static function fakerUsers()
     {
-        // Helper::dump(!self::checkTableExist('users'));
-        /*$tableName = 'users';
+        
+        $tableName = 'users';
         $attributes = ['firstname', 'lastname', 'email', 'password', 'status', 'profile'];
 
         $params = array_map(fn($attr) => ":$attr", $attributes);  //Ex : [ ':firstname', ':email']
 
         $sql = "INSERT INTO $tableName (".implode(',', $attributes).") VALUES(".implode(',', $params).")";
-        // Helper::dump($sql);
 
         $req = self::$db->prepare($sql);
+        
 
-
-        if(!self::checkTableExist('users') !== false){
+        //if tables users exist and there are not users into this table
+        if(!self::checkTableExist('users') && self::countUsers() === 0  ){
             $i = 1;
             foreach (self::users() as $data  ){
-
-                foreach ($data as  $key => $value) {
-
-                    foreach ($attributes as $attribute) {
-                        $req->bindValue(":$attribute", $data[$key]);
-                    }
-                    $req->execute();
-
+                
+                foreach ($attributes as $attribute) {
+                  
+                    $req->bindValue(":$attribute", $data[$attribute]);
                 }
+                //Helper::dump($req);die;
+
+                $req->execute();
+
 
                 //self::$db->exec($statement);
-                echo "{$i}- User is created successfully <br>";
+                echo "- User{$i} is created successfully <br>";
                 $i++ ;
             }
-        }*/
+        }
 
     }
 
@@ -124,6 +125,20 @@ class Seed
         return empty($data);
     }
 
+    public static function countUsers()
+    {
+        $dbName = self::$db->getDbName(); 
+        $sql = "SELECT * FROM users";
+
+        $req = self::$db->query($sql, User::class);
+
+        //Helper::dump($req);die;
+
+        return count($req);
+
+
+    }
+
 
     private static function creatingDatabase()
     {
@@ -147,11 +162,12 @@ class Seed
 
     public function loadSeed()
     {
+        
         //1- Create database
           //self::creatingDatabase() ; we need create database manually
         //2- create tables
           self::creatingTables();
         //3- insert faker data
-          //self::fakerUsers();
+          self::fakerUsers();
     }
 }
