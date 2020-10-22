@@ -1,5 +1,7 @@
 a{
     /*background-color: red!important;*/
+    transition: all 4s ease-in-out;
+
 }
 
 .auth{
@@ -18,6 +20,8 @@ a{
     margin-right: 8px;
     background-color: chartreuse;
     margin-top: 6px;
+    transition: all 4s ease-in-out;
+
 }
 
 #status_text{
@@ -34,4 +38,9 @@ a{
 
 img.img-circle{
     pointer-events: none;
+}
+
+.alert{
+    transition: all 4s ease-in-out;
+
 }
