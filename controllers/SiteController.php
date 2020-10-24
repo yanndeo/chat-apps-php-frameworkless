@@ -8,6 +8,7 @@ use app\core\Helper;
 use app\core\Request;
 use app\managers\UserManager;
 use app\models\Message;
+use app\models\User;
 
 class SiteController extends Controller {
 
@@ -33,7 +34,7 @@ class SiteController extends Controller {
     public function chat(Request $request)
     {
         //user is auth.
-        if (!Application::isGuest()){
+        if (!Application::isGuest() && Helper::getUser()->status === User::STATE['ACTIVE']){
             //show form message
             $message = new Message();
 
@@ -41,7 +42,7 @@ class SiteController extends Controller {
             $users = $this->userManager->findAllOnline();
 
             $this->setLayout('chat');
-            return $this->render('index', ['model' => $message, 'users' => $users]);
+            return $this->render('index', [ 'users' => $users]);
         }
         $this->addFlashMessage('warning', 'You are not authorized');
         return $this->redirectTo('/login');

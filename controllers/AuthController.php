@@ -12,12 +12,18 @@ use app\managers\UserManager;
 
 class AuthController extends Controller {
 
+
     public UserManager $manager;
+
+    
 
     public function __construct()
     {
         $this->manager = new UserManager();
     }
+
+
+
 
     /**
      * @param Request $request
@@ -32,13 +38,12 @@ class AuthController extends Controller {
             //1-Assign data to the properties model : populate object.
             $user->loadData($request->getBody());
 
-            //2-Check Validation  and user data
+            //2-Check Validation and user data
             if($user->validate() && empty($user->errors)){
                 $this->manager->save($user);
                 $this->addFlashMessage('SUCCESS', "Your account has been registered.");
                 $this->redirectTo('/');
             }
-
             return $this->render('register',['model' => $user ]);
         }
 
@@ -52,6 +57,7 @@ class AuthController extends Controller {
 
     public function login(Request $request)
     {
+
         $loginForm = new LoginForm();
 
         if($request->isPost()){
@@ -61,6 +67,7 @@ class AuthController extends Controller {
             if ($loginForm->validate() && $this->manager->login($loginForm)){
 
                 $this->addFlashMessage('SUCCESS', "You are logged.");
+                // call event manager ?
 
                 return $this->redirectTo('/chat');
             }
@@ -78,6 +85,7 @@ class AuthController extends Controller {
        // Helper::dump($user);die;
         Application::$app->logout();
         $this->addFlashMessage('SUCCESS', "You have has been disconnected.");
+        // call event manager ?
         return $this->redirectTo('/login');
 
     }

@@ -38,8 +38,9 @@ $app->seed->loadSeed();
 $app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/chat', [SiteController::class, 'chat']);
 
-//$app->router->get('/message/with/:id', [ChatController::class, 'sendMessage']); // regex
 $app->router->get('message/with/:id', [ChatController::class, 'showMessages']); // regex
+$app->router->post('/message/with/:id', [ChatController::class, 'sendMessage']); // regex
+
 
 
 

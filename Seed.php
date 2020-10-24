@@ -58,8 +58,7 @@ class Seed
             ['firstname' => 'luna', 'lastname' => 'sisi', 'email' => 'luna@yahoo.fr', 'password' => 'secret', 'status' => 0, 'profile' => 'user_1'],
             ['firstname' => 'murielle', 'lastname' => 'barnabe', 'email' => 'murielle@gmail.com', 'password' => 'secret', 'status' =>  0, 'profile' => 'user_2'],
             ['firstname' => 'hussein', 'lastname' => 'mustapha', 'email' => 'hussein@gmail.com', 'password' => 'secret', 'status' => 0, 'profile' => 'user_3'],
-            ['firstname' => 'Hanane', 'lastname' => 'Tazi', 'email' => 'hanane@gmail.fr', 'password' => 'secret', 'status' => 0, 'profile' => 'user_4'],
-
+            ['firstname' => 'Hanane', 'lastname' => 'Tazi', 'email' => 'hanane@gmail.fr', 'password' => 'secret', 'status' => 0, 'profile' => 'user_6'],
         ];
     }
 

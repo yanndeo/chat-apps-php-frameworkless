@@ -1,4 +1,5 @@
 <?php
+
 /** @var $model Message */
 /** @var $users User */
 
@@ -15,26 +16,26 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
 <div class="row">
     <div class="col-md-4 bg-white ">
         <div class=" row border-bottom padding-sm" style="height: 40px; padding: 10px">
-            <?php echo count($users) -1 ; ?> Member(s) online
+            <?php echo count($users) - 1; ?> Member(s) online
         </div>
 
         <!-- =============================================================== -->
         <!-- member list -->
         <ul class="friend-list">
 
-            <?php  foreach ($users as $user ): ?>
-            <?php if(Helper::getUser()->id !== $user->id): ?>
-                <li>
-                    <a href="/message/with/<?php echo $user->id; ?>"  onclick="func(0)" class="clearfix">
-                        <img src="https://bootdey.com/img/Content/<?php echo $user->profile ?>.jpg" alt=""  class="img-circle">
-                        <div class="friend-name">
-                            <strong><?php echo ucfirst($user->firstname. ' '.$user->lastname) ; ?> </strong>
-                        </div>
-                        <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                        <small class="time text-muted " id="status_icon"></small>
-                    </a>
-                </li>
-                <?php endif ; ?>
+            <?php foreach ($users as $user) : ?>
+                <?php if (Helper::getUser()->id !== $user->id) : ?>
+                    <li>
+                        <a href="/message/with/<?php echo $user->id; ?>" onclick="func(0)" class="clearfix">
+                            <img src="https://bootdey.com/img/Content/<?php echo $user->profile ?>.jpg" alt="" class="img-circle">
+                            <div class="friend-name">
+                                <strong><?php echo ucfirst($user->firstname . ' ' . $user->lastname); ?> </strong>
+                            </div>
+                            <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
+                            <small class="time text-muted " id="status_icon"></small>
+                        </a>
+                    </li>
+                <?php endif; ?>
             <?php endforeach; ?>
 
         </ul>
@@ -46,9 +47,9 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
         <div class="chat-message">
             <ul class="chat">
                 <li class="left clearfix">
-                    	<span class="chat-img pull-left">
-                    		<img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                    	</span>
+                    <span class="chat-img pull-left">
+                        <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
+                    </span>
                     <div class="chat-body clearfix">
                         <div class="header">
                             <strong class="primary-font">John Doe</strong>
@@ -60,9 +61,9 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                     </div>
                 </li>
                 <li class="right clearfix">
-                    	<span class="chat-img pull-right">
-                    		<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                    	</span>
+                    <span class="chat-img pull-right">
+                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
+                    </span>
                     <div class="chat-body clearfix">
                         <div class="header">
                             <strong class="primary-font">Sarah</strong>
@@ -74,9 +75,9 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                     </div>
                 </li>
                 <li class="left clearfix">
-                        <span class="chat-img pull-left">
-                    		<img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                    	</span>
+                    <span class="chat-img pull-left">
+                        <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
+                    </span>
                     <div class="chat-body clearfix">
                         <div class="header">
                             <strong class="primary-font">John Doe</strong>
@@ -88,9 +89,9 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                     </div>
                 </li>
                 <li class="right clearfix">
-                        <span class="chat-img pull-right">
-                    		<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                    	</span>
+                    <span class="chat-img pull-right">
+                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
+                    </span>
                     <div class="chat-body clearfix">
                         <div class="header">
                             <strong class="primary-font">Sarah</strong>
@@ -102,9 +103,9 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                     </div>
                 </li>
                 <li class="left clearfix">
-                        <span class="chat-img pull-left">
-                    		<img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                    	</span>
+                    <span class="chat-img pull-left">
+                        <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
+                    </span>
                     <div class="chat-body clearfix">
                         <div class="header">
                             <strong class="primary-font">John Doe</strong>
@@ -116,9 +117,9 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                     </div>
                 </li>
                 <li class="right clearfix">
-                        <span class="chat-img pull-right">
-                    		<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                    	</span>
+                    <span class="chat-img pull-right">
+                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
+                    </span>
                     <div class="chat-body clearfix">
                         <div class="header">
                             <strong class="primary-font">Sarah</strong>
@@ -130,9 +131,9 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                     </div>
                 </li>
                 <li class="right clearfix">
-                        <span class="chat-img pull-right">
-                    		<img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                    	</span>
+                    <span class="chat-img pull-right">
+                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
+                    </span>
                     <div class="chat-body clearfix">
                         <div class="header">
                             <strong class="primary-font">Sarah</strong>
@@ -147,17 +148,19 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
         </div>
 
 
+        <?php if(isset($model)): ?>
         <div class="chat-box bg-white">
 
-        <?php $form = Form::opening("", 'post') ?>
+            <?php $form = Form::opening("", 'post') ?>
 
             <?php echo $form->field($model, 'content'); ?>
 
             <span class="input-group-btn">
-                <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                <button type="submit" class="btn btn-block btn-primary">SEND</button>
             </span>
             <?php Form::closing() ?>
         </div>
+        <?php endif; ?>
 
 
         <!--<div class="chat-box bg-white">
@@ -167,6 +170,6 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
             			<button class="btn btn-success no-rounded" type="button">Send</button>
             		</span>
             </div><!-- /input-group -->
-        </div>-->
-    </div>
+    </div>-->
+</div>
 </div>
