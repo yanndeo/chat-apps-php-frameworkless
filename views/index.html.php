@@ -2,15 +2,13 @@
 
 /** @var $model Message */
 /** @var $users User */
+/** @var $with User */
 
 
-use app\core\form\Form;
-use app\core\Helper;
+use app\Helper;
 use app\models\Message;
 use app\models\User;
 
-
-$images = array("user_6", "user_2", "user_3", "user_5", "user_1");
 
 ?>
 <div class="row">
@@ -19,26 +17,8 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
             <?php echo count($users) - 1; ?> Member(s) online
         </div>
 
-        <!-- =============================================================== -->
         <!-- member list -->
-        <ul class="friend-list">
-
-            <?php foreach ($users as $user) : ?>
-                <?php if (Helper::getUser()->id !== $user->id) : ?>
-                    <li>
-                        <a href="/message/with/<?php echo $user->id; ?>" onclick="func(0)" class="clearfix">
-                            <img src="https://bootdey.com/img/Content/<?php echo $user->profile ?>.jpg" alt="" class="img-circle">
-                            <div class="friend-name">
-                                <strong><?php echo ucfirst($user->firstname . ' ' . $user->lastname); ?> </strong>
-                            </div>
-                            <div class="last-message text-muted">Lorem ipsum dolor sit amet.</div>
-                            <small class="time text-muted " id="status_icon"></small>
-                        </a>
-                    </li>
-                <?php endif; ?>
-            <?php endforeach; ?>
-
-        </ul>
+        <?php include __DIR__ . '/inc/list-users-online.html.php' ?>
     </div>
 
     <!--=========================================================-->
@@ -46,21 +26,52 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
     <div class="col-md-8 bg-white ">
         <div class="chat-message">
             <ul class="chat">
-                <li class="left clearfix">
-                    <span class="chat-img pull-left">
-                        <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">John Doe</strong>
-                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                </li>
-                <li class="right clearfix">
+
+                <?php if ((isset($conversations)) && count($conversations) > 0) : ?>
+
+                    //1- Determiner la position de l'user connecté.<br>
+                    //2- Afficher le message correspondant<br>
+                    //3- Afficher son nom et sa photo<br>
+
+                    <?php  //Helper::dump($with) ?>
+                    <?php foreach ($conversations as $msg) : ?>
+
+                        <?php if ($msg->user_to === Helper::auth()->id) : ?>
+                            <li class="right clearfix">
+                                <span class="chat-img pull-right">
+                                    <img src="https://bootdey.com/img/Content/<?php echo Helper::auth()->profile ?>.jpg" alt="<?php echo Helper::auth()->displayName() ?>" style="cursor: pointer;">
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font"><?php echo Helper::auth()->displayName() ?></strong>
+                                        <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
+                                    </div>
+                                    <p>
+                                        <?php echo $msg->content; ?>
+                                    </p>
+                                </div>
+                            </li>
+                        <?php elseif ($msg->user_from === Helper::auth()->id) : ?>
+
+                            <li class="left clearfix">
+                                <span class="chat-img pull-left">
+                                    <img src="https://bootdey.com/img/Content/<?php echo $with->profile ?>.jpg" alt="User Avatar">
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <div class="header">
+                                        <strong class="primary-font"><?php echo $with->displayName() ?></strong>
+                                        <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
+                                    </div>
+                                    <p>
+                                        <?php echo $msg->content; ?>
+                                    </p>
+                                </div>
+                            </li>
+                        <?php endif; ?>
+
+
+                    <?php endforeach; ?>
+                <!--  <li class="right clearfix">
                     <span class="chat-img pull-right">
                         <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
                     </span>
@@ -73,93 +84,22 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
                         </p>
                     </div>
-                </li>
-                <li class="left clearfix">
-                    <span class="chat-img pull-left">
-                        <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">John Doe</strong>
-                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
+                </li> -->
+                <?php else: ?>
+                    <div class="">
+
                     </div>
-                </li>
-                <li class="right clearfix">
-                    <span class="chat-img pull-right">
-                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">Sarah</strong>
-                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
-                        </p>
-                    </div>
-                </li>
-                <li class="left clearfix">
-                    <span class="chat-img pull-left">
-                        <img src="https://bootdey.com/img/Content/user_3.jpg" alt="User Avatar">
-                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">John Doe</strong>
-                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 12 mins ago</small>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                </li>
-                <li class="right clearfix">
-                    <span class="chat-img pull-right">
-                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">Sarah</strong>
-                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
-                        </p>
-                    </div>
-                </li>
-                <li class="right clearfix">
-                    <span class="chat-img pull-right">
-                        <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
-                    </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">Sarah</strong>
-                            <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales at.
-                        </p>
-                    </div>
-                </li>
+                <?php endif ?>
+
+
+
+
             </ul>
         </div>
 
 
-        <?php if(isset($model)): ?>
-        <div class="chat-box bg-white">
-
-            <?php $form = Form::opening("", 'post') ?>
-
-            <?php echo $form->field($model, 'content'); ?>
-
-            <span class="input-group-btn">
-                <button type="submit" class="btn btn-block btn-primary">SEND</button>
-            </span>
-            <?php Form::closing() ?>
-        </div>
+        <?php if (isset($model)) : ?>
+            <?php include __DIR__ . '/inc/form.html.php';  ?>
         <?php endif; ?>
 
 
@@ -169,7 +109,7 @@ $images = array("user_6", "user_2", "user_3", "user_5", "user_1");
                 <span class="input-group-btn">
             			<button class="btn btn-success no-rounded" type="button">Send</button>
             		</span>
-            </div><!-- /input-group -->
-    </div>-->
+            </div> /input-group -->
+    </div>
 </div>
 </div>

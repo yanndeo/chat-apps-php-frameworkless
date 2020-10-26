@@ -4,6 +4,9 @@
 namespace app\models;
 
 
+use app\core\Helper;
+use app\models\User;
+use app\managers\UserManager;
 use app\managers\MessageManager;
 
 class Message extends \app\core\Model
@@ -16,10 +19,36 @@ class Message extends \app\core\Model
     public string $created_at = '';
 
 
-
-    public function __construct()
+    /**
+     * @param int $id
+     * @return \app\models\User
+     */
+    public function getUser(int $id):User
     {
+        $userManager = new UserManager();
+        return $userManager->findOne(['id'=> $id], User::class);
     }
+
+    public function getReceiver():User
+    {
+        $userManager = new UserManager();
+        $user = $userManager->findOne(['id'=> $this->user_to], User::class);
+        return $user;
+    }
+
+    public function getSender(): User
+    {
+        $userManager = new UserManager();
+        $user = $userManager->findOne(['id' => $this->user_from], User::class);
+        return $user;
+    }
+
+
+    public function formatDate(\DateTime $date )
+    {
+
+    }
+
 
     public function rules(): array
     {

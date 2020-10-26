@@ -2,12 +2,13 @@
 namespace app\managers;
 
 use app\core\Application;
-use app\core\Helper;
 use app\core\Manager;
 use app\core\Model;
+use app\Helper;
 use app\models\User;
 
-class UserManager extends Manager{
+class UserManager extends Manager {
+
 
     public static string $table = "users";
 

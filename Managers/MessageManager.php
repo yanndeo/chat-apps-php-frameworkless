@@ -20,12 +20,16 @@ class MessageManager extends Manager
 
 
 
-    public function getAll(int $from, int $to)
+    public function getMessages(int $user_id)
     {
+        $user_auth = Helper::auth()->id;
         $className = Message::class;
-        $sql = "SELECT * FROM {$this->getTableName()} WHERE user_from = {$from} AND  user_to = {$to} ORDER BY 'DESC' ";
+        $sql = "SELECT * FROM {$this->getTableName()} 
+                WHERE user_to = {$user_id} AND user_from = {$user_auth}
+                OR user_to = {$user_auth} AND user_from = {$user_id}
+                ORDER BY 'ASC' ";
         //Helper::dump($sql);die;
-
+                
         return $this->db->query($sql, $className);
     }
 

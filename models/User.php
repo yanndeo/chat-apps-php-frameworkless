@@ -6,7 +6,8 @@ use app\core\Application;
 use app\core\Model;
 use app\managers\UserManager;
 
-class User extends Model{
+class User extends Model
+{
 
 
     public const STATE = [
@@ -75,5 +76,6 @@ class User extends Model{
         return $userManager->findOne($params, self::class);
     }
 
-    
+
+
 }

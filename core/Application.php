@@ -74,7 +74,7 @@ class Application {
 
     public static function isAuth() 
     {
-    
+       // return self::$app->user;
     }
 
 

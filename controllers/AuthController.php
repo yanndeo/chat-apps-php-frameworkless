@@ -78,7 +78,7 @@ class AuthController extends Controller {
 
     public function logout()
     {
-        $user = Helper::getUser(); //user connected
+        $user = Helper::auth(); //user connected
         $user->status = User::STATE['INACTIVE']; //set status user obj
         $this->manager->update($user, 'status'); // set record user into database
 

@@ -11,6 +11,7 @@ use app\core\Request;
 use app\managers\MessageManager;
 use app\managers\UserManager;
 use app\models\Message;
+use app\models\User;
 
 class ChatController extends Controller
 {
@@ -24,28 +25,23 @@ class ChatController extends Controller
     public function showMessages(int $id, Request $request)
     {
        // Helper::dump($id);die;
-
         if (!Application::isGuest()) {
-
-            $message = new Message();
-            //getMessage between $id and user auth
-            
-            $messageManager = new MessageManager();
-            $from = Helper::getUser()->id;
-            $to = $id;
-            $conversations = $messageManager->getAll($from, $to);
-           // Helper::dump($conversations);
-           // die;
-
             $userManager = new UserManager();
-            $users = $userManager->findAllOnline();
+            $usersConnected = $userManager->findAllOnline();
+            $message = new Message();
+            $conversations = (new MessageManager())->getMessages( $id);
+            $with = $userManager->findOne(['id'=> $id], User::class);
 
             $this->setLayout('chat');
-            return $this->render('index', ['model' => $message, 'users' => $users]);
-
-
+            return $this->render('index', [
+                    'model' => $message,
+                    'users' => $usersConnected,
+                    'with' => $with,
+                    'conversations' => $conversations]);
         }
     }
+
+
 
 
     public function sendMessage(int $id, Request $request)

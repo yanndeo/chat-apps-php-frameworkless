@@ -1,10 +1,12 @@
 <?php
+
 use \app\core\Helper;
 use \app\core\Application;
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <!--  This file has been downloaded from bootdey.com    @bootdey on twitter -->
@@ -18,8 +20,8 @@ use \app\core\Application;
             font-size: 12px;
             color: #777;
             background: #f9f9f9;
-            font-family: 'Open Sans',sans-serif;
-            margin-top:20px;
+            font-family: 'Open Sans', sans-serif;
+            margin-top: 20px;
         }
 
         .bg-white {
@@ -75,7 +77,8 @@ use \app\core\Application;
             right: 8px;
         }
 
-        small, .small {
+        small,
+        .small {
             font-size: 85%;
         }
 
@@ -96,7 +99,7 @@ use \app\core\Application;
             margin: 0;
         }
 
-        .chat-message{
+        .chat-message {
             background: #f9f9f9;
         }
 
@@ -126,9 +129,9 @@ use \app\core\Application;
             font-size: 11px;
             padding: 10px;
             border: 1px solid #f1f5fc;
-            box-shadow: 0 1px 1px rgba(0,0,0,.05);
-            -moz-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+            -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
         }
 
         .chat li .chat-body .header {
@@ -205,7 +208,9 @@ use \app\core\Application;
             color: #3c8dbc;
         }
 
-        a:hover, a:active, a:focus {
+        a:hover,
+        a:active,
+        a:focus {
             text-decoration: none;
             outline: 0;
         }
@@ -213,47 +218,55 @@ use \app\core\Application;
     <link rel="stylesheet" href="../../assets/css/style.css">
 
 </head>
+
 <body>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-<div class="container bootstrap snippets bootdey">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container bootstrap snippets bootdey">
 
-    <nav class="navbar navbar-default " style="margin-top: 2px;">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand active" href="/">CHAT APP TEST</a>
+        <nav class="navbar navbar-default " style="margin-top: 2px;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand active" href="/">CHAT APP TEST</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse"">
+            <ul class=" nav navbar-nav mr-auto">
+                    <li class="active"><a href="/">Home</a></li>
+            </ul>
+                    <?php if (!Application::isGuest()) :; ?>
+                        <ul class="nav navbar-nav mr-auto auth">
+                            <li class=""><a href="/logout">DECONNEXION</a></li>
+                            <li><a href="">Welcome <?php echo Helper::auth()->displayName(); ?></a></li>
+                            <li>
+                                <a href="/message/with/<?php echo $user->id; ?>" onclick="func(0)" class="clearfix">
+                                    <img id="status_img" src="https://bootdey.com/img/Content/<?php echo Helper::auth()->profile ?>.jpg" alt="" class="img-circle">
+                                    <small class="time text-muted " id="status_icon"></small>
+                                </a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
+
+                </div>
+                <!--/.nav-collapse -->
             </div>
-            <div id="navbar" class="navbar-collapse collapse"">
-            <ul class="nav navbar-nav mr-auto">
-                <li class="active"><a href="/">Home</a></li>
-            </ul>
-            <?php if(!Application::isGuest()): ; ?>
-            <ul class="nav navbar-nav mr-auto auth">
-                <li class=""><a href="/logout">DECONNEXION</a></li>
-                <li><a href="">Welcome <?php echo Helper::getUser()->displayName(); ?></a></li>
-            </ul>
-            <?php endif; ?>
+            <!--/.container-fluid -->
+        </nav>
 
+        <div id="flash-messages">
+            <?php Helper::flashMessage(); ?>
         </div>
-        <!--/.nav-collapse -->
-</div>
-<!--/.container-fluid -->
-</nav>
+        {{content}}
+    </div>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
 
-<div id="flash-messages">
-    <?php Helper::flashMessage(); ?>
-</div>
-    {{content}}
-</div>
-<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-</script>
+    </script>
 </body>
+
 </html>

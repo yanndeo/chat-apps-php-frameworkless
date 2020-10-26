@@ -75,6 +75,7 @@ abstract class Manager{
         $sql = "SELECT * FROM {$this->getTableName()} WHERE id = :id";
         $attr = [$id];
         $className = get_class($this);
+        Helper::dump($className);
         
         $query = $this->db->prepare($sql ,$attr, $className );
         $data = $query->fetchAll(PDO::FETCH_CLASS, $className);

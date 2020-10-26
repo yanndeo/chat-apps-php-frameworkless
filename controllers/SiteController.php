@@ -34,7 +34,7 @@ class SiteController extends Controller {
     public function chat(Request $request)
     {
         //user is auth.
-        if (!Application::isGuest() && Helper::getUser()->status === User::STATE['ACTIVE']){
+        if (!Application::isGuest() && Helper::auth()->status === User::STATE['ACTIVE']){
             //show form message
             $message = new Message();
 
