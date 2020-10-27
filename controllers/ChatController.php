@@ -6,8 +6,8 @@ namespace app\controllers;
 
 use app\core\Application;
 use app\core\Controller;
-use app\core\Helper;
 use app\core\Request;
+use app\Helper;
 use app\managers\MessageManager;
 use app\managers\UserManager;
 use app\models\Message;
@@ -24,7 +24,6 @@ class ChatController extends Controller
 
     public function showMessages(int $id, Request $request)
     {
-       // Helper::dump($id);die;
         if (!Application::isGuest()) {
             $userManager = new UserManager();
             $usersConnected = $userManager->findAllOnline();
@@ -32,12 +31,12 @@ class ChatController extends Controller
             $conversations = (new MessageManager())->getMessages( $id);
             $with = $userManager->findOne(['id'=> $id], User::class);
 
-            $this->setLayout('chat');
+           // $this->setLayout('chat');
             return $this->render('index', [
                     'model' => $message,
                     'users' => $usersConnected,
                     'with' => $with,
-                    'conversations' => $conversations]);
+                    'conversations' => $conversations], 'chat');
         }
     }
 
@@ -47,23 +46,29 @@ class ChatController extends Controller
     public function sendMessage(int $id, Request $request)
     {
         //init message object
-        if (!Application::isGuest()) {
-
-            $message = new Message();
+        if (!Application::isGuest() ) {
 
             $userManager = new UserManager();
             $users = $userManager->findAllOnline();
-            $this->setLayout('chat');
+            //build form
+            $message = new Message();
 
-            if ($request->isPost()) {
-                $message->loadData($request->getBody());
-                //$this->manager->save($message);
+            if ($request->isAjax()) {
+               $data =$request->getBody();
+              $isSaved = (new MessageManager())->create($data);
 
-                //load all messages to <-> from
-                return $this->render('index', ['model' => $message, 'users' => $users]);
+
+              if ($isSaved === true){
+                  $data = json_encode(['message' => 'success', 'data'=> $data]);
+                  return  $data;
+              }
+
+              $this->addFlashMessage('DANGER', 'unsuccessfully to send message' );
+
             }
 
-            return $this->render('index', ['model' => $message, 'users' => $users]);
+           // $this->setLayout('chat');
+            return $this->render('index', ['model' => $message, 'users' => $users], 'chat');
         }
         $this->redirectTo('/login');
 

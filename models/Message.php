@@ -44,9 +44,17 @@ class Message extends \app\core\Model
     }
 
 
-    public function formatDate(\DateTime $date )
+    public function formattedDate()
     {
-
+        //init date now
+        //compare
+        //if created_at > date
+            //-> show d-m-y
+        //if created < date
+            //-> show
+        $createdAt = $this->created_at;
+        $date = (new \DateTime())->format('Y-m-d h:i:s');
+        return $date;
     }
 
 

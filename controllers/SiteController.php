@@ -41,8 +41,8 @@ class SiteController extends Controller {
             //manager get all user online
             $users = $this->userManager->findAllOnline();
 
-            $this->setLayout('chat');
-            return $this->render('index', [ 'users' => $users]);
+           // $this->setLayout('chat');
+            return $this->render('index', [ 'users' => $users], 'chat');
         }
         $this->addFlashMessage('warning', 'You are not authorized');
         return $this->redirectTo('/login');

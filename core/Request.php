@@ -61,6 +61,22 @@ class Request
 
 
     /**
+     * Check if req is ajax
+     * @return bool
+     * https://www.php.net/manual/fr/function.strcasecmp.php
+     */
+    public function isAjax():bool
+    {
+        $isAjaxRequest = false;
+        if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0) {
+            $isAjaxRequest = true;
+        }
+        return  $isAjaxRequest;
+    }
+
+
+    /**
      * Get $_GET , $_POST data
      * and filter this
      * sanitize user data input

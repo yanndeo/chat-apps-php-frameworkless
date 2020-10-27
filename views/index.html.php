@@ -25,15 +25,10 @@ use app\models\User;
     <!-- selected chat -->
     <div class="col-md-8 bg-white ">
         <div class="chat-message">
-            <ul class="chat">
+            <ul class="chat" id="chat-panel-message" data-user-with="<?php echo $with->id ?>" data-user-auth="<?php echo Helper::auth()->id ;?>">
 
                 <?php if ((isset($conversations)) && count($conversations) > 0) : ?>
 
-                    //1- Determiner la position de l'user connecté.<br>
-                    //2- Afficher le message correspondant<br>
-                    //3- Afficher son nom et sa photo<br>
-
-                    <?php  //Helper::dump($with) ?>
                     <?php foreach ($conversations as $msg) : ?>
 
                         <?php if ($msg->user_to === Helper::auth()->id) : ?>
@@ -87,7 +82,7 @@ use app\models\User;
                 </li> -->
                 <?php else: ?>
                     <div class="">
-
+                        <p> show messages with first user of the list connected</p>
                     </div>
                 <?php endif ?>
 

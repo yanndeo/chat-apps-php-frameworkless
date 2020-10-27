@@ -11,19 +11,31 @@ abstract class Controller{
     public string $layout = 'main';
 
 
+
+
+
     public function setLayout(string $layout)
     {
         $this->layout = $layout;
     }
 
+
+
+
     /**
      * @param string $view
      * @param array $params
+     * @param string $layout
      */
-    protected function render(string $view, array $params = [] )
+    protected function render(string $view, array $params = [], string $layout = '' )
     {
+        $layout = $layout ? $layout : $this->layout;
+        $this->setLayout($layout);
         return Application::$app->router->renderView($view, $params);
     }
+
+
+
 
     /**
      * @param string $key
@@ -33,6 +45,9 @@ abstract class Controller{
     {
        return  Application::$app->session->setFlashMessage($key, $message);
     }
+
+
+
 
     /**
      * @param string $path

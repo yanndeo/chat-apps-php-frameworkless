@@ -26,7 +26,7 @@ class Field{
         return sprintf('
             <div class="form-group %s">
                 <label>%s</label>
-                <input type="%s" name="%s" value="%s" class="form-control" >
+                <input type="%s" name="%s" value="%s" class="form-control" id="%s" >
                 <span class="text-danger"> %s </span>
             </div>
         ',
@@ -35,6 +35,7 @@ class Field{
             $this->type, //type input
             $this->attribute,  //name
             $this->model->{$this->attribute}, //value
+            $this->attribute, //id
             $this->model->getFirstError($this->attribute)
         );
     }

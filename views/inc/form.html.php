@@ -10,7 +10,7 @@
     <?php echo $form->field($model, 'content'); ?>
 
     <span class="input-group-btn">
-        <button type="submit" class="btn btn-block btn-primary">SEND</button>
+        <button type="submit" class="btn btn-block btn-primary" id="format-chat-btn">SEND</button>
     </span>
     <?php Form::closing() ?>
 </div>

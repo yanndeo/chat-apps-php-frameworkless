@@ -2,6 +2,7 @@
 
 use \app\core\Helper;
 use \app\core\Application;
+/** @var $user User */
 
 ?>
 <!DOCTYPE html>
@@ -232,7 +233,7 @@ use \app\core\Application;
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand active" href="/">CHAT APP TEST</a>
+                    <a class="navbar-brand active" href="/">CHAT APP </a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse"">
             <ul class=" nav navbar-nav mr-auto">
@@ -264,9 +265,7 @@ use \app\core\Application;
     </div>
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-
-    </script>
+    <script src="../../assets/js/app.js"></script>
 </body>
 
 </html>
