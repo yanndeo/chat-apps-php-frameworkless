@@ -25,13 +25,13 @@ use app\models\User;
     <!-- selected chat -->
     <div class="col-md-8 bg-white ">
         <div class="chat-message">
-            <ul class="chat" id="chat-panel-message" data-user-with="<?php echo $with->id ?>" data-user-auth="<?php echo Helper::auth()->id ;?>">
+            <ul class="chat" id="chat-panel-message" data-user-with="<?php echo $with->id ?>" data-user-auth="<?php echo Helper::auth()->id; ?>">
 
                 <?php if ((isset($conversations)) && count($conversations) > 0) : ?>
 
                     <?php foreach ($conversations as $msg) : ?>
 
-                        <?php if ($msg->user_to === Helper::auth()->id) : ?>
+                        <?php if ($msg->user_to && $msg->user_from === Helper::auth()->id) : ?>
                             <li class="right clearfix">
                                 <span class="chat-img pull-right">
                                     <img src="https://bootdey.com/img/Content/<?php echo Helper::auth()->profile ?>.jpg" alt="<?php echo Helper::auth()->displayName() ?>" style="cursor: pointer;">
@@ -46,7 +46,7 @@ use app\models\User;
                                     </p>
                                 </div>
                             </li>
-                        <?php elseif ($msg->user_from === Helper::auth()->id) : ?>
+                        <?php else : ?>
 
                             <li class="left clearfix">
                                 <span class="chat-img pull-left">
@@ -66,7 +66,7 @@ use app\models\User;
 
 
                     <?php endforeach; ?>
-                <!--  <li class="right clearfix">
+                    <!--  <li class="right clearfix">
                     <span class="chat-img pull-right">
                         <img src="https://bootdey.com/img/Content/user_1.jpg" alt="User Avatar">
                     </span>
@@ -80,7 +80,7 @@ use app\models\User;
                         </p>
                     </div>
                 </li> -->
-                <?php else: ?>
+                <?php else : ?>
                     <div class="">
                         <p> show messages with first user of the list connected</p>
                     </div>
@@ -108,3 +108,21 @@ use app\models\User;
     </div>
 </div>
 </div>
+
+<!-- Template && marqueur -->
+<script type="text/mustache" id="user-message-template">
+    <li class="{{ position}} clearfix">
+            <span class="chat-img pull-{{ position}}">
+                 <img src="https://bootdey.com/img/Content/{{profile}}.jpg" alt="<?php echo Helper::auth()->displayName() ?>" style="cursor: pointer;">
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="primary-font">{{displayName}}</strong>
+                    <small class="pull-right text-muted"><i class="fa fa-clock-o"></i> 13 mins ago</small>
+                </div>
+                <p>
+                    {{content}}
+                </p>
+            </div>
+        </li>
+    </script>

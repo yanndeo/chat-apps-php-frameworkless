@@ -28,3 +28,4 @@ Implement Chat using MVC &amp; POO without framework . PHP /MYSQL/ HTML
 - Création automatique des tables de base de donnée
 - Création automatique des comptes utilisateurs.
 - Création automatique des messages (conversation)
+- Envoi de message

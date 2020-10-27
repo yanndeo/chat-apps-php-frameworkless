@@ -1,6 +1,7 @@
 
 let getById = (x) => document.getElementById(x);
 let getByName =(x)=> document.getElementsByName(x);
+let getBySelector = s => document.querySelector(s);
 
 
 const handleSubmit = (event, chatPanelElt) => {
@@ -27,6 +28,24 @@ const handleSubmit = (event, chatPanelElt) => {
 
 }
 
+
+
+const handleTemplating = ()=>{
+
+    const message = {
+      position: "right",
+      profile: "user_2",
+      displayName: "Yann deo",
+      content: "Please God"
+    };
+
+    const template = getBySelector("#user-message-template").innerHTML;
+    const html = Mustache.render(template, message);
+
+    console.log(html)
+    getBySelector("#chat-panel-message").innerHTML += html;
+}
+
 (function (){
 
     let chatPanelElt = getById('chat-panel-message');
@@ -34,6 +53,7 @@ const handleSubmit = (event, chatPanelElt) => {
 
     formBtnElt.addEventListener('click', (e)=>{
         handleSubmit(e, chatPanelElt);
+        handleTemplating();
     })
 
 

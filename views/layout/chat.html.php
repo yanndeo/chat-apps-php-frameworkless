@@ -2,6 +2,7 @@
 
 use \app\core\Helper;
 use \app\core\Application;
+
 /** @var $user User */
 
 ?>
@@ -238,7 +239,7 @@ use \app\core\Application;
                 <div id="navbar" class="navbar-collapse collapse"">
             <ul class=" nav navbar-nav mr-auto">
                     <li class="active"><a href="/">Home</a></li>
-            </ul>
+                    </ul>
                     <?php if (!Application::isGuest()) :; ?>
                         <ul class="nav navbar-nav mr-auto auth">
                             <li class=""><a href="/logout">DECONNEXION</a></li>
@@ -263,8 +264,11 @@ use \app\core\Application;
         </div>
         {{content}}
     </div>
+   
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js" integrity="sha512-6AXIWogbKpsHvoZJrJtHpIYES4wP8czSj0zk7ZfwOYS8GWYFNSykwdfapt7yQc4ikZytemBu+QyVObzBHJMwYg==" crossorigin="anonymous"></script>
+
     <script src="../../assets/js/app.js"></script>
 </body>
 

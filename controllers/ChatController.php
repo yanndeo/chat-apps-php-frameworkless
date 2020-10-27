@@ -25,6 +25,7 @@ class ChatController extends Controller
     public function showMessages(int $id, Request $request)
     {
         if (!Application::isGuest()) {
+
             $userManager = new UserManager();
             $usersConnected = $userManager->findAllOnline();
             $message = new Message();
@@ -45,7 +46,6 @@ class ChatController extends Controller
 
     public function sendMessage(int $id, Request $request)
     {
-        //init message object
         if (!Application::isGuest() ) {
 
             $userManager = new UserManager();
