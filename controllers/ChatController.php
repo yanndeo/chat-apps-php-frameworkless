@@ -60,10 +60,12 @@ class ChatController extends Controller
 
               if ($isSaved === true){
                   $data = json_encode(['message' => 'success', 'data'=> $data]);
-                  return  $data;
+                    echo $data;
+              }else{
+                    $this->addFlashMessage('DANGER', 'unsuccessfully to send message');
+
               }
 
-              $this->addFlashMessage('DANGER', 'unsuccessfully to send message' );
 
             }
 
