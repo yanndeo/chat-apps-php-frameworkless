@@ -26,6 +26,14 @@ class UserManager extends Manager {
     }
 
 
+    /**
+     * Undocumented function
+     *
+     * @param User $user
+     * @param string $attribute
+     * @param string $where
+     * @return void
+     */
     public function update(User $user,string $attribute, $where = 'id' )
     {
         $value = $user->{$attribute};
@@ -76,6 +84,8 @@ class UserManager extends Manager {
 
     }
 
+
+    
     /**
      * @return array
      */
