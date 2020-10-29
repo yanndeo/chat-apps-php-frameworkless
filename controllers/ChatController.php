@@ -17,10 +17,15 @@ use app\models\User;
 class ChatController extends Controller
 {
 
+
+
     public function __construct()
     {
        
     }
+
+
+
 
 
     public function showMessages(int $id, Request $request)
@@ -54,10 +59,11 @@ class ChatController extends Controller
             //build form
             $message = new Message();
 
-            if ($request->isAjax()) {
-               $data =$request->getBody();
-               $isSaved = (new MessageManager())->create($data);
+            if($request->isAjax()) {
 
+               $data = $request->getBody();
+
+               $isSaved = (new MessageManager())->create($data);
 
               if ($isSaved === true){
 

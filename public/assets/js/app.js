@@ -1,9 +1,10 @@
+
 let getById = x => document.getElementById(x);
 let getByName = x => document.getElementsByName(x);
 let getBySelector = s => document.querySelector(s);
 
 const handleSubmit = chatPanelElt => {
-    
+
   let user_auth_id = chatPanelElt.dataset.userAuth;
   let user_with_id = chatPanelElt.dataset.userWith;
   let contentMsgElt = getByName("content")[0];
@@ -13,7 +14,6 @@ const handleSubmit = chatPanelElt => {
     user_with_id,
     contentMsgElt: contentMsgElt.value
   };
-
 
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -29,6 +29,7 @@ const handleSubmit = chatPanelElt => {
       }
     });
   });
+
 };
 
 const handleTemplating = message => {
@@ -37,22 +38,27 @@ const handleTemplating = message => {
 
   console.log(html);
   getBySelector("#chat-panel-message").innerHTML += html;
+  getById('content').value = "";
 };
 
 (function () {
+
   let chatPanelElt = getById("chat-panel-message");
   let formBtnElt = getById("format-chat-btn");
 
   formBtnElt.addEventListener("click", e => {
+
     e.preventDefault();
+
     handleSubmit(chatPanelElt)
       .then(data => {
         console.log(data);
         handleTemplating(data);
       })
       .catch(() => {
-        alert("ajax req no ok");
+        alert("ajax req. no ok");
       });
+
   });
 
 
