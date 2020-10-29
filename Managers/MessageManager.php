@@ -20,6 +20,7 @@ class MessageManager extends Manager
         $message->user_from = $data['user_auth_id'];
         $message->user_to = $data['user_with_id'];
         $message->created_at = (new \DateTime())->format('Y-m-d H:i:s');
+        
        // Helper::dump($message);
         return parent::save($message);
     }

@@ -7,6 +7,7 @@ namespace app\controllers;
 use app\core\Application;
 use app\core\Controller;
 use app\core\Request;
+use app\core\Response;
 use app\Helper;
 use app\managers\MessageManager;
 use app\managers\UserManager;
@@ -44,7 +45,7 @@ class ChatController extends Controller
 
 
 
-    public function sendMessage(int $id, Request $request)
+    public function sendMessage(int $id, Request $request, Response $response)
     {
         if (!Application::isGuest() ) {
 
@@ -55,15 +56,19 @@ class ChatController extends Controller
 
             if ($request->isAjax()) {
                $data =$request->getBody();
-              $isSaved = (new MessageManager())->create($data);
+               $isSaved = (new MessageManager())->create($data);
 
 
               if ($isSaved === true){
-                  $data = json_encode(['message' => 'success', 'data'=> $data]);
-                    echo $data;
-              }else{
-                    $this->addFlashMessage('DANGER', 'unsuccessfully to send message');
 
+                  $formattedData = [
+                      'position' => 'right',
+                      'displayName' => Helper::auth()->displayName(),
+                      'profile' => Helper::auth()->profile,
+                      'content' => $data['contentMsgElt'],
+                  ];
+
+                return $response->json($formattedData);
               }
 
 
@@ -76,4 +81,8 @@ class ChatController extends Controller
 
 
     }
+
+
+
+   
 }

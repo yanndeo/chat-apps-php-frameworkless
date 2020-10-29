@@ -20,4 +20,12 @@ class Response
         exit();
     }
 
+
+
+    public function json($data)
+    {
+        header('Content-type: application/json');
+        echo json_encode($data);
+    }
+
 }

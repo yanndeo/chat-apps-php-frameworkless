@@ -5,12 +5,14 @@
 /** @var $with User */
 
 
-use app\Helper;
-use app\models\Message;
+use app\Helper; 
+use app\models\Message; 
 use app\models\User;
 
 
 ?>
+
+
 <div class="row">
     <div class="col-md-4 bg-white ">
         <div class=" row border-bottom padding-sm" style="height: 40px; padding: 10px">

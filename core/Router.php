@@ -108,7 +108,7 @@ class Router
 
                     Application::$app->controller = new $controller[0];
                     $controller[0] = Application::$app->controller;
-                    return call_user_func($controller, $matches[1], $this->request);
+                    return call_user_func($controller, $matches[1], $this->request, $this->response);
 
                 }
 
